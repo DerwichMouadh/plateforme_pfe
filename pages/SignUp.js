@@ -3,36 +3,57 @@ import Image from "next/image";
 import bg from "../images/bg.jpg";
 import authService from "../services/authService";
 import route from "next/router";
+import { ArrowCircleLeftIcon } from "@heroicons/react/outline";
+import Link from "next/link";
+import axios from "axios";
+
 
 function SignUp() {
-  const [data, setData] = useState({});
-  const onChangeHandler = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const form = new FormData();
-    form.append("firstname", data.firstname);
-    form.append("lastname", data.lastname);
-    form.append("email", data.email);
-    form.append("password", data.password);
+    var formData = new FormData();
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("email", email);
+    formData.append("password", password);
     //form.append("designation", data.designation);
-    form.append("location", data.location);
-    form.append("date_of_birth", data.date_of_birth);
+    formData.append("location", location);
+    //formData.append("date_of_birth", data.date_of_birth);
     //form.append("gender", data.gender);
 
-    route.push("/");
-    authService.register(form)
-      .then((res) => {
-        console.log(res);
+    const config = {
+      method: "POST",
+      url: `http://localhost:5000/auth/register`,
+
+      headers: {
+        //Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    };
+    axios(config)
+      .then(({ status }) => {
+        if (status === 200) {
+          console.log("sahha mustapha");
+        }
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response) {
+          const { status, data } = err.response;
+        }
       });
   };
+  const handleInputChange = (e, fn) => {
+    fn(e.target.value);
+    // markInputAsTrue(e.target.id);
+  };
+
   const [input, setInput] = useState({
     password: "",
     confirmPassword: "",
@@ -94,7 +115,6 @@ function SignUp() {
 
   return (
     <div className="grid place-items-center h-screen w-screen relative scrollbar scrollbar-thumb-hidden scrollbar-track-hidden">
-      <div className="text-white z-50 absolute right-10 top-10"></div>
       <Image
         alt=""
         src={bg}
@@ -104,6 +124,13 @@ function SignUp() {
       />
       <div className=" backdrop-blur-sm bg-white/10 text-white z-50 rounded-3xl shadow-[rgba(0,0,0,0.8)] shadow-xl">
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="cursor-pointer z-50 absolute left-14 top-14">
+            <Link href="/" className="">
+              <a className="w-full">
+                <ArrowCircleLeftIcon className="h-10 w-10 text-white hover:text-violet-500" />
+              </a>
+            </Link>
+          </div>
           <div className="space-y-8">
             <div>
               <img
@@ -136,7 +163,11 @@ function SignUp() {
                               <input
                                 type="text"
                                 name="firstname"
-                                onChange={onChangeHandler}
+                                value={firstname}
+                                //onChange={onChangeHandler}
+                                onChange={(e) =>
+                                  handleInputChange(e, setFirstname)
+                                }
                                 id="first-name"
                                 autoComplete="given-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -153,7 +184,11 @@ function SignUp() {
                               <input
                                 type="text"
                                 name="lastname"
-                                onChange={onChangeHandler}
+                                value={lastname}
+                                //onChange={onChangeHandler}
+                                onChange={(e) =>
+                                  handleInputChange(e, setLastname)
+                                }
                                 id="last-name"
                                 autoComplete="family-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -170,7 +205,9 @@ function SignUp() {
                               <input
                                 type="text"
                                 name="email"
-                                onChange={onChangeHandler}
+                                value={email}
+                                //onChange={onChangeHandler}
+                                onChange={(e) => handleInputChange(e, setEmail)}
                                 id="email-address"
                                 autoComplete="email"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -186,7 +223,11 @@ function SignUp() {
                               <input
                                 type="password"
                                 name="password"
-                                onChange={onChangeHandler}
+                                value={password}
+                                //onChange={onChangeHandler}
+                                onChange={(e) =>
+                                  handleInputChange(e, setPassword)
+                                }
                                 // value={input.password}
                                 // onChange={pass}
                                 // onBlur={validateInput}
@@ -212,7 +253,7 @@ function SignUp() {
                                 type="password"
                                 name="confirmPassword"
                                 placeholder="Enter Confirm Password"
-                                onChange={onChangeHandler}
+                                //onChange={onChangeHandler}
                                 // value={input.confirmPassword}
                                 // onChange={pass}
                                 // onBlur={validateInput}
@@ -275,7 +316,11 @@ function SignUp() {
                               <input
                                 type="text"
                                 name="location"
-                                onChange={onChangeHandler}
+                                value={location}
+                                //onChange={onChangeHandler}
+                                onChange={(e) =>
+                                  handleInputChange(e, setLocation)
+                                }
                                 id="city"
                                 autoComplete="address-level2"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -292,7 +337,7 @@ function SignUp() {
                               <input
                                 type="date"
                                 name="date_of_birth"
-                                onChange={onChangeHandler}
+                                //onChange={onChangeHandler}
                                 id="region"
                                 autoComplete="address-level1"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"

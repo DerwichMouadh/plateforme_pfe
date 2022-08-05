@@ -8,5 +8,4 @@ const register = (data)=>{
     return http.post("/auth/register" , data)
 }
 
-
 export default { create, register }
