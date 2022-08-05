@@ -1,8 +1,38 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import bg from "../images/bg.jpg";
+import authService from "../services/authService";
+import route from "next/router";
 
 function SignUp() {
+  const [data, setData] = useState({});
+  const onChangeHandler = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("firstname", data.firstname);
+    form.append("lastname", data.lastname);
+    form.append("email", data.email);
+    form.append("password", data.password);
+    //form.append("designation", data.designation);
+    form.append("location", data.location);
+    form.append("date_of_birth", data.date_of_birth);
+    //form.append("gender", data.gender);
+
+    route.push("/");
+    authService.register(form)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const [input, setInput] = useState({
     password: "",
     confirmPassword: "",
@@ -57,6 +87,11 @@ function SignUp() {
     });
   };
 
+  function pass() {
+    onInputChange;
+    onChangeHandler;
+  }
+
   return (
     <div className="grid place-items-center h-screen w-screen relative scrollbar scrollbar-thumb-hidden scrollbar-track-hidden">
       <div className="text-white z-50 absolute right-10 top-10"></div>
@@ -87,7 +122,7 @@ function SignUp() {
               <div className="mt-10 sm:mt-0">
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                   <div className="mt-5 md:mt-0 md:col-span-3">
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" onSubmit={onSubmitHandler}>
                       <div className="overflow-hidden rounded-xl">
                         <div className="px-4 py-5 bg-transparent sm:p-6">
                           <div className="grid grid-cols-8 gap-6">
@@ -100,7 +135,8 @@ function SignUp() {
                               </label>
                               <input
                                 type="text"
-                                name="first-name"
+                                name="firstname"
+                                onChange={onChangeHandler}
                                 id="first-name"
                                 autoComplete="given-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -116,7 +152,8 @@ function SignUp() {
                               </label>
                               <input
                                 type="text"
-                                name="last-name"
+                                name="lastname"
+                                onChange={onChangeHandler}
                                 id="last-name"
                                 autoComplete="family-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -132,7 +169,8 @@ function SignUp() {
                               </label>
                               <input
                                 type="text"
-                                name="email-address"
+                                name="email"
+                                onChange={onChangeHandler}
                                 id="email-address"
                                 autoComplete="email"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -148,9 +186,10 @@ function SignUp() {
                               <input
                                 type="password"
                                 name="password"
-                                value={input.password}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
+                                onChange={onChangeHandler}
+                                // value={input.password}
+                                // onChange={pass}
+                                // onBlur={validateInput}
                                 id="password"
                                 placeholder="Enter Password"
                                 autoComplete="password"
@@ -173,9 +212,10 @@ function SignUp() {
                                 type="password"
                                 name="confirmPassword"
                                 placeholder="Enter Confirm Password"
-                                value={input.confirmPassword}
-                                onChange={onInputChange}
-                                onBlur={validateInput}
+                                onChange={onChangeHandler}
+                                // value={input.confirmPassword}
+                                // onChange={pass}
+                                // onBlur={validateInput}
                                 id="confirmPassword"
                                 autoComplete="password"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -189,14 +229,15 @@ function SignUp() {
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="country"
+                                htmlFor="designation"
                                 className="block text-sm font-medium text-gray-200 pl-4"
                               >
                                 Designation
                               </label>
                               <select
-                                id="country"
-                                name="country"
+                                id="designation"
+                                name="designation"
+                                //onChange={onChangeHandler}
                                 autoComplete="country-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               >
@@ -233,7 +274,8 @@ function SignUp() {
                               </label>
                               <input
                                 type="text"
-                                name="city"
+                                name="location"
+                                onChange={onChangeHandler}
                                 id="city"
                                 autoComplete="address-level2"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -249,7 +291,8 @@ function SignUp() {
                               </label>
                               <input
                                 type="date"
-                                name="region"
+                                name="date_of_birth"
+                                onChange={onChangeHandler}
                                 id="region"
                                 autoComplete="address-level1"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -261,11 +304,12 @@ function SignUp() {
                                 htmlFor="country"
                                 className="block text-sm font-medium text-gray-200 pl-4"
                               >
-                                Designation
+                                Gender
                               </label>
                               <select
                                 id="country"
-                                name="country"
+                                name="gender"
+                                //onChange={onChangeHandler}
                                 autoComplete="country-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               >
@@ -280,29 +324,12 @@ function SignUp() {
                           </div>
                         </div>
                         <div className="px-4 py-3 bg-transparent text-center sm:px-6">
-                          {error.password === "" &&
-                            error.confirmPassword === "" &&
-                            input.password !== "" &&
-                            input.confirmPassword !== "" && (
-                              <button
-                                type="submit"
-                                className="inline-flex justify-center py-2 px-10 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-                              >
-                                Sign Up
-                              </button>
-                            )}
-                          {error.password !== "" ||
-                            error.confirmPassword !== "" ||
-                            input.password === "" ||
-                            input.confirmPassword === "" && (
-                              <button
-                                disabled
-                                type="submit"
-                                className="inline-flex justify-center py-2 px-10 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-                              >
-                                Sign Up
-                              </button>
-                            )}
+                          <button
+                            type="submit"
+                            className="inline-flex justify-center py-2 px-10 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                          >
+                            Sign Up
+                          </button>
                         </div>
                       </div>
                     </form>
