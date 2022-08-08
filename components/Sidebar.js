@@ -25,7 +25,7 @@ import axios from "axios";
 
 function Sidebar({ token }) {
   let time = new Date().toLocaleTimeString();
-  let date = new Date().toUTCString().substring(5, 16);
+  let date = new Date().toUTCString().substring(0, 16);
   const [currTime, setCurrTime] = useState(time);
   const [currDate, setCurrDate] = useState(date);
   const updateTime = () => {

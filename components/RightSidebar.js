@@ -4,17 +4,19 @@ import {
   UserIcon,
   PaperAirplaneIcon,
 } from "@heroicons/react/solid";
-import React from "react";
+import React, { useState } from "react";
 import RowCard from "./RowCard";
 import SmallSquare from "./SmallSquare";
 import Link from "next/link";
+import io  from "socket.io-client";
 
 function RightSidebar() {
   const date = new Date();
   date.setHours(date.getHours() + 1);
-  
+
+
   return (
-    <div className="bg-myColors-100 text-white pt-6 pb-8 px-4 text-sm w-3/12 min-w-[200px] flex flex-col space-y-5 h-screen">
+    <div className="bg-myColors-100 text-white pt-6 pb-8 px-4 text-sm w-3/12 min-w-[200px] flex flex-col h-screen">
       <div className="flex h-11 cursor-pointer items-center rounded-xl bg-myColors-200 mb-6">
         <input
           className="pl-4 flex-grow h-full text-sm focus:ring-0 focus:border-0 font-normal rounded-bl-xl rounded-tl-xl text-white items-center bg-transparent outline-none border-0"
@@ -55,50 +57,65 @@ function RightSidebar() {
         </div>
       </div> */}
 
-      <div className="flex-col flex-grow scrollbar scrollbar-thumb-hidden scrollbar-track-hidden">
+      <div className="flex-col flex-grow scrollbar scrollbar-thumb-hidden scrollbar-track-hidden mt-7">
         <h2 className="fixed bg-myColors-100 font-semibold text-xl w-full pb-4 z-50 font-fancy">
           Your team&apos;s chat
         </h2>
         <div className="pt-9">
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri r ey ery ry r rer ery ery ery ery ery ery ery ery y ery ry er ery er r ery e yryeryery ey ery ery eryery ery ery ery ery ery rey  ery yr eyeyr ey eyr eryery ery e ry "
-            group={date.toUTCString()}
+            fullName="Mustapha El Masri"
+            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
+            group={new Date().toUTCString().substring(0,22)}
           />
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri r ey ery ry r rer ery ery ery ery ery ery ery ery y ery ry er ery er r ery e yryeryery ey ery ery eryery ery ery ery ery ery rey  ery yr eyeyr ey eyr eryery ery e ry "
-            group={new Date().toUTCString()}
+            fullName="Mustapha El Masri"
+            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
+            group={new Date().toUTCString().substring(0,22)}
           />
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri r ey ery ry r rer ery ery ery ery ery ery ery ery y ery ry er ery er r ery e yryeryery ey ery ery eryery ery ery ery ery ery rey  ery yr eyeyr ey eyr eryery ery e ry "
-            group={new Date().toUTCString()}
+            fullName="Mustapha El Masri"
+            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
+            group={new Date().toUTCString().substring(0,22)}
           />
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri r ey ery ry r rer ery ery ery ery ery ery ery ery y ery ry er ery er r ery e yryeryery ey ery ery eryery ery ery ery ery ery rey  ery yr eyeyr ey eyr eryery ery e ry "
-            group={new Date().toUTCString()}
+            fullName="Mustapha El Masri"
+            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
+            group={new Date().toUTCString().substring(0,22)}
           />
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri r ey ery ry r rer ery ery ery ery ery ery ery ery y ery ry er ery er r ery e yryeryery ey ery ery eryery ery ery ery ery ery rey  ery yr eyeyr ey eyr eryery ery e ry "
-            group={new Date().toUTCString()}
+            fullName="Mustapha El Masri"
+            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
+            group={new Date().toUTCString().substring(0,22)}
           />
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri r ey ery ry r rer ery ery ery ery ery ery ery ery y ery ry er ery er r ery e yryeryery ey ery ery eryery ery ery ery ery ery rey  ery yr eyeyr ey eyr eryery ery e ry "
-            group={new Date().toUTCString()}
+            fullName="Mustapha El Masri"
+            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
+            group={new Date().toUTCString().substring(0,22)}
+          />
+          <RowCard
+            Icon={UserIcon}
+            fullName="Mustapha El Masri"
+            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
+            group={new Date().toUTCString().substring(0,22)}
           />
         </div>
       </div>
-      <div className="flex h-11 cursor-pointer items-center rounded-xl bg-myColors-200 mb-6">
+      <div className="flex cursor-pointer items-center rounded-xl bg-myColors-200 mt-4">
         <input
           className="pl-4 flex-grow h-full text-sm focus:ring-0 focus:border-0 font-normal rounded-bl-xl rounded-tl-xl text-white items-center bg-transparent outline-none border-0"
           type="text"
           placeholder="Say something..."
+          
         />
-        <PaperAirplaneIcon className="h-10 w-10 px-2 hover:opacity-100 text-white opacity-60 rotate-90" />
+        <button >
+          <PaperAirplaneIcon className="h-10 w-10 px-2 hover:opacity-100 text-white opacity-60 rotate-90" />
+        </button>
       </div>
     </div>
   );
