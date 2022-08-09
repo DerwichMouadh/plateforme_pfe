@@ -407,7 +407,7 @@ function HomeContent() {
               <div>
                 <div className=" text-myColors-600">Mustapha El Masri</div>
                 <div className="text-sm">
-                  {new Date().toUTCString().substring(0, 17)}
+                  {new Date().toUTCString().substring(0, 22)}
                 </div>
                 <div className="text-xs text-gray-400">
                   Anfield Road, Liverpool L4 0TH
@@ -421,7 +421,7 @@ function HomeContent() {
               <div>
                 <div className=" text-myColors-600">Mouadh Derwich</div>
                 <div className="text-sm ">
-                  {new Date().toUTCString().substring(0, 17)}
+                  {new Date().toUTCString().substring(0, 22)}
                 </div>
                 <div className="text-xs text-gray-400">
                   Fulham Road, Fulham, London SW6 1HS
@@ -435,7 +435,7 @@ function HomeContent() {
               <div>
                 <div className=" text-myColors-600">Mouadh Derwich</div>
                 <div className="text-sm ">
-                  {new Date().toUTCString().substring(0, 17)}
+                  {new Date().toUTCString().substring(0, 22)}
                 </div>
                 <div className="text-xs text-gray-400">
                   Fulham Road, Fulham, London SW6 1HS

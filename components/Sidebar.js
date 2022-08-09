@@ -71,6 +71,17 @@ function Sidebar({ token }) {
   filtredFiles = files.filter((file) => file.status === "In Progress");
   let num = filtredFiles.length;
 
+  // Quotes
+  const url = "https://type.fit/api/quotes";
+  const [quotes, setQuotes] = useState([]);
+  useEffect(() => {
+    let n = Math.floor(Math.random() * (5 - 0 + 1)) + 0;
+    axios.get(url).then((res) => {
+      setQuotes(res.data[n]);
+      console.log(res.data[n]);
+    });
+  }, [url]);
+
   return (
     <div className="bg-myColors-100 p-4 pb-8 text-sm font-medium w-2/12 min-w-[200px] flex flex-col space-y-3 h-screen">
       <div className="px-4 pt-4 pb-10">
@@ -131,29 +142,31 @@ function Sidebar({ token }) {
             </a>
           </Link>
         </div>
-        <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300 ">
-          <Link href="/Schedule">
-            <a className="w-full">
-              <SidebarRow Icon={CalendarIcon} title="Schedule" />
-            </a>
-          </Link>
-        </div>
-        <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300">
-          <Link href="/Teams/TeamsList">
-            <a className="w-full">
-              <SidebarRow Icon={UserGroupIcon} title="Teams" />
-            </a>
-          </Link>
-        </div>
-        <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300">
-          <Link href="/Overview">
-            <a className="w-full">
-              <SidebarRow Icon={CogIcon} title="Settings" />
-            </a>
-          </Link>
-        </div>
+
         {openMore && (
           <div>
+            <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300 ">
+              <Link href="/Schedule">
+                <a className="w-full">
+                  <SidebarRow Icon={CalendarIcon} title="Schedule" />
+                </a>
+              </Link>
+            </div>
+
+            <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300">
+              <Link href="/Overview">
+                <a className="w-full">
+                  <SidebarRow Icon={CogIcon} title="Settings" />
+                </a>
+              </Link>
+            </div>
+            <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300">
+              <Link href="/Teams/TeamsList">
+                <a className="w-full">
+                  <SidebarRow Icon={UserGroupIcon} title="Teams" />
+                </a>
+              </Link>
+            </div>
             <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300 ">
               <Link href="/Overview">
                 <a className="w-full">
@@ -189,7 +202,13 @@ function Sidebar({ token }) {
           </a>
         </div>
       </div>
-      <div className="bg-myColors-300 rounded-2xl flex-col space-y-4 py-10 p-3 text-white">
+      <div className=" bg-myColors-300 rounded-2xl flex items-center space-y-4 min-h-[200px] h-[200px] p-3 text-white">
+        <div className="flex-col space-y-1">
+          <div className="text-green-500 text-center text-lg">{quotes.text}</div>
+          <div className="text-right text-sm font-fancy">{quotes.author}</div>
+        </div>
+      </div>
+      <div className="bg-myColors-300 rounded-2xl flex-col space-y-4 py-6 p-3 text-white">
         <div className="text-center">{date}</div>
         <div className="text-center text-3xl">{time}</div>
       </div>
