@@ -204,13 +204,15 @@ function Sidebar({ token }) {
       </div>
       <div className=" bg-myColors-300 rounded-2xl flex items-center space-y-4 min-h-[200px] h-[200px] p-3 text-white">
         <div className="flex-col space-y-1">
-          <div className="text-green-500 text-center text-lg">{quotes.text}</div>
+          <div className="text-myColors-600 text-center text-lg">
+            {quotes.text}
+          </div>
           <div className="text-right text-sm font-fancy">{quotes.author}</div>
         </div>
       </div>
       <div className="bg-myColors-300 rounded-2xl flex-col space-y-4 py-6 p-3 text-white">
         <div className="text-center">{date}</div>
-        <div className="text-center text-3xl">{time}</div>
+        <div className="text-center text-2xl text-myColors-600">{time}</div>
       </div>
     </div>
   );
