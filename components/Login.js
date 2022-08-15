@@ -27,6 +27,7 @@ function Login() {
         console.log(res);
         setData(res.data);
         cookie.set("token", res.data.token, { expires: 1 });
+        cookie.set("id", res.data.id, { expires: 1 });
         cookie.set("email", data.email, { expires: 1 });
         router.push("/Overview");
       })

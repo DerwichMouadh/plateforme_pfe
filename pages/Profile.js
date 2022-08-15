@@ -1,12 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
-import HomeContent from "../components/HomeContent";
 import Navbar from "../components/Navbar";
 import RightSidebar from "../components/RightSidebar";
+import ProfileUserContent from "../components/ProfileUserContent";
 import Sidebar from "../components/Sidebar";
 import { requirePageAuth } from "../utils/auth";
+import { useEffect, useState } from "react";
 
-function Overview() {
+function Profile({ id }) {
   return (
     <div className="flex">
       <Head>
@@ -22,7 +23,7 @@ function Overview() {
       <Sidebar />
       <div className=" bg-myColors-100 h-screen w-7/12 relative">
         <Navbar navBarTitle_1="Overview" navBarTitle_2="" />
-        <HomeContent />
+        <ProfileUserContent id={id} />
       </div>
       <RightSidebar />
     </div>
@@ -31,4 +32,4 @@ function Overview() {
 
 export const getServerSideProps = requirePageAuth;
 
-export default Overview;
+export default Profile;

@@ -7,6 +7,7 @@ import {
   LinkIcon,
   ClipboardIcon,
   DocumentSearchIcon,
+  ExternalLinkIcon,
 } from "@heroicons/react/outline";
 import { UserIcon } from "@heroicons/react/solid";
 import axios from "axios";
@@ -283,33 +284,18 @@ function HomeContent() {
         )}
         {first === 1 && (
           <div className="flex-col space-y-2">
-            <div className=" bg-myColors-300 px-4 p-3 rounded-2xl">
-              <div className="text-sm text-myColors-600">
-                Fantasy Premier League
+            <div className="flex justify-between items-center bg-myColors-300 px-4 p-3 rounded-2xl">
+              <div className="flex space-x-3 items-center">
+                <div>
+                  <LinkIcon className="h-6 w-6 text-myColors-600" />
+                </div>
+                <div className="text-sm text-myColors-600">
+                  Fantasy Premier League
+                </div>
               </div>
-              <div className="text-xs text-gray-400 underline">
+              <div className="text-gray-400 hover:text-white">
                 <a target=" blank" href="https://fantasy.premierleague.com/">
-                  https://fantasy.premierleague.com
-                </a>
-              </div>
-            </div>
-            <div className=" bg-myColors-300 px-4 p-3 rounded-2xl">
-              <div className="text-sm text-myColors-600">
-                Fantasy Premier League
-              </div>
-              <div className="text-xs text-gray-400 underline">
-                <a target=" blank" href="https://fantasy.premierleague.com/">
-                  https://fantasy.premierleague.com
-                </a>
-              </div>
-            </div>
-            <div className=" bg-myColors-300 px-4 p-3 rounded-2xl">
-              <div className="text-sm text-myColors-600">
-                Fantasy Premier League
-              </div>
-              <div className="text-xs text-gray-400 underline">
-                <a target=" blank" href="https://fantasy.premierleague.com/">
-                  https://fantasy.premierleague.com
+                  <ExternalLinkIcon className="h-6 w-6" />
                 </a>
               </div>
             </div>
@@ -371,18 +357,21 @@ function HomeContent() {
             {weddings.map(({ _id, name, location, date }) => (
               <div
                 key={_id}
-                className="flex space-x-4 items-center bg-myColors-300 px-4 p-3 rounded-2xl"
+                className="flex space-x-4 bg-myColors-300 px-4 p-3 rounded-2xl"
               >
-                <div>
+                <div className="">
                   <UserIcon className="h-8 w-8 rounded-full bg-green-500 p-1" />
                 </div>
                 <div className="flex-col space-y-1">
-                  <div className=" text-myColors-600">{name}</div>
-                  <div className="text-sm">
+                  <div className="text-sm text-myColors-600">{name}</div>
+                  <div className="text-xs">
                     {new Date(date).toUTCString().substring(0, 22)}
                   </div>
                   <div className=" text-xs text-gray-400">
-                    <b className="text-gray-300">Location:<br></br></b> {location}
+                    <b className="text-gray-400">
+                      Location:<br></br>
+                    </b>{" "}
+                    {location}
                   </div>
                 </div>
               </div>

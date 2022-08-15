@@ -2,6 +2,7 @@ import nextCookie from 'next-cookies';
 
 export const requirePageAuth = (ctx) => {
     const { token } = nextCookie(ctx);
+    const { id } = nextCookie(ctx);
 
     if (!token) {
         return {
@@ -13,5 +14,5 @@ export const requirePageAuth = (ctx) => {
         };
     }
 
-    return { props: { token } };
+    return { props: { token, id } };
 };
