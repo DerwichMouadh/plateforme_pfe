@@ -8,23 +8,29 @@ import React, { useState } from "react";
 import RowCard from "./RowCard";
 import SmallSquare from "./SmallSquare";
 import Link from "next/link";
-import io  from "socket.io-client";
+import io from "socket.io-client";
 
 function RightSidebar() {
-  const date = new Date();
+  let date = new Date();
+  const [currDate, setCurrDate] = useState(date);
   date.setHours(date.getHours() + 1);
 
+  const updateDate = () => {
+    date = new Date();
+    setCurrDate(date);
+  };
+  setInterval(updateDate, 1000);
 
   return (
     <div className="bg-myColors-100 text-white pt-6 pb-8 px-4 text-sm w-3/12 min-w-[200px] flex flex-col h-screen">
-      <div className="flex h-11 cursor-pointer items-center rounded-xl bg-myColors-200 mb-6">
+      {/* <div className="flex h-11 cursor-pointer items-center rounded-xl bg-myColors-200 mb-6">
         <input
           className="pl-4 flex-grow h-full text-sm focus:ring-0 focus:border-0 font-normal rounded-bl-xl rounded-tl-xl text-white items-center bg-transparent outline-none border-0"
           type="text"
           placeholder="Find something..."
         />
         <SearchIcon className="h-10 w-10 px-2 hover:opacity-100 text-white opacity-60" />
-      </div>
+      </div> */}
       {/* <div className="flex-grow flex-col space-y-3">
         <h2 className="font-semibold text-xl font-fancy">Admin Panel</h2>
         <div className="flex-col space-y-4 pt-1">
@@ -56,6 +62,17 @@ function RightSidebar() {
           </div>
         </div>
       </div> */}
+      <div className="flex items-center mt-2 px-6 justify-between text-myColors-600 bg-myColors-300 rounded-2xl p-3">
+        <div>
+          <ClockIcon className="h-6 w-6" />
+        </div>
+        {/* <div className=" text-2xl font-semibold">
+          {date.toUTCString().substring(17, 25)}
+        </div> */}
+        <div>
+          <ClockIcon className="h-6 w-6" />
+        </div>
+      </div>
 
       <div className="flex-col flex-grow scrollbar scrollbar-thumb-hidden scrollbar-track-hidden mt-7">
         <h2 className="fixed bg-myColors-100 font-semibold text-xl w-full pb-4 z-50 font-fancy">
@@ -66,43 +83,43 @@ function RightSidebar() {
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0,22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0,22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0,22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0,22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0,22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0,22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0,22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
         </div>
       </div>
@@ -111,9 +128,8 @@ function RightSidebar() {
           className="pl-4 flex-grow h-full text-sm focus:ring-0 focus:border-0 font-normal rounded-bl-xl rounded-tl-xl text-white items-center bg-transparent outline-none border-0"
           type="text"
           placeholder="Say something..."
-          
         />
-        <button >
+        <button>
           <PaperAirplaneIcon className="h-10 w-10 px-2 hover:opacity-100 text-white opacity-60 rotate-90" />
         </button>
       </div>

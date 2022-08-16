@@ -203,7 +203,7 @@ function ProfileUserContent({ id }) {
               <div>
                 <h2 className=" font-light">Teams</h2>
                 <div className="text-white flex-col space-y-4 mt-4">
-                  {teams.map}
+                  
                 </div>
               </div>
             </div>
