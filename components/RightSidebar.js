@@ -83,43 +83,43 @@ function RightSidebar() {
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            group={new Date(date).toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            group={new Date(date).toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            group={new Date(date).toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            group={new Date(date).toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            group={new Date(date).toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            group={new Date(date).toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            group={new Date(date).toUTCString().substring(0, 22)}
           />
         </div>
       </div>

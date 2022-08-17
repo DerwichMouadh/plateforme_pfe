@@ -4,7 +4,7 @@ import {
   ChevronRightIcon,
   BellIcon,
 } from "@heroicons/react/solid";
-import { MenuAlt1Icon, CogIcon, LogoutIcon } from "@heroicons/react/outline";
+import { MenuAlt1Icon, CogIcon, LogoutIcon , UserCircleIcon} from "@heroicons/react/outline";
 import React, { useState } from "react";
 import Image from "next/image";
 import NavbarItem from "./NavbarItem";
@@ -36,8 +36,11 @@ function Navbar({ navBarTitle_1, navBarTitle_2 }) {
       </div>
       <div className="flex space-x-1 ">
         <NavbarItem Icon={BellIcon} alert={true} />
-        <div onClick={logout}>
+        <div onClick={logout} className="relative group">
           <NavbarItem Icon={LogoutIcon} />
+          <div className={` group-hover:block hidden w-[149px] text-center absolute right-0 top-[51px] bg-myColors-200 text-myColors-400 rounded-xl py-1`}>
+            Log Out
+          </div>
         </div>
         <div
           onClick={() => setOpen(!open)}
@@ -59,9 +62,9 @@ function Navbar({ navBarTitle_1, navBarTitle_2 }) {
         <div
           className={`${
             open ? "block" : "hidden"
-          } absolute bg-myColors-200 hover:bg-myColors-600 right-0 top-[75px] flex space-x-4 p-1 px-4 rounded-xl text-myColors-600 hover:text-myColors-200 cursor-pointer`}
+          } absolute bg-myColors-200 hover:bg-myColors-400 right-0 top-[75px] flex space-x-4 p-1 px-4 rounded-xl text-myColors-400 hover:text-myColors-200 cursor-pointer`}
         >
-          <LogoutIcon className="w-6 h-6" />
+          <UserCircleIcon className="w-6 h-6" />
           <Link href="/Profile">
             <button>My profile</button>
           </Link>

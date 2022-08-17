@@ -23,6 +23,9 @@ import SidebarRow from "./SidebarRow";
 import Link from "next/link";
 import axios from "axios";
 
+import Image from "next/image";
+import logo from "../images/logo_green.png";
+
 function Sidebar({ token }) {
   let time = new Date().toLocaleTimeString();
   let date = new Date().toUTCString().substring(0, 16);
@@ -84,9 +87,18 @@ function Sidebar({ token }) {
 
   return (
     <div className="bg-myColors-100 p-4 pb-8 text-sm font-medium w-2/12 min-w-[200px] flex flex-col space-y-3 h-screen">
-      <div className="px-4 pt-4 pb-10">
+      <div className="pl-6">
         <Link href="/Overview">
-          <a className="text-2xl font-bold text-white font-fancy">DashAdmin</a>
+          <a className="text-2xl font-bold text-white font-fancy">
+          <Image
+                alt="logo"
+                src={logo}
+                priority
+                width="80"
+                height="80"
+                className=" object-contain"
+              />
+          </a>
         </Link>
       </div>
       <div className="flex-grow scrollbar scrollbar-thumb-hidden scrollbar-track-hidden">

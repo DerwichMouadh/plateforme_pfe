@@ -18,6 +18,8 @@ import LineChart from "./Charts/LineChart";
 import PieChart from "./Charts/PieChart";
 import RadarChart from "./Charts/RadarChart";
 import AnnouncRow from "./AnnouncRow";
+import BirthdayRow from "./BirthdayRow";
+import QuickLinkRow from "./QuickLinkRow";
 
 function HomeContent() {
   const [files, setFiles] = useState([]);
@@ -228,26 +230,9 @@ function HomeContent() {
         )}
         {first === 1 && (
           <div className="flex-col space-y-2">
-            <div className="flex space-x-4 items-center bg-myColors-300 px-4 p-3 rounded-2xl cursor-pointer hover:bg-myColors-200">
-              <div>
-                <UserIcon className="h-8 w-8 rounded-full bg-green-500 p-1" />
-              </div>
-              <div>
-                <div className="text-sm text-myColors-600">
-                  Mustapha El Masri
-                </div>
-                <div className="text-xs text-gray-300">24 yers old</div>
-              </div>
-            </div>
-            <div className="flex space-x-4 items-center bg-myColors-300 px-4 p-3 rounded-2xl cursor-pointer hover:bg-myColors-200">
-              <div>
-                <UserIcon className="h-8 w-8 rounded-full bg-violet-500 p-1" />
-              </div>
-              <div>
-                <div className="text-sm text-myColors-600">Mouadh Derwich</div>
-                <div className="text-xs text-gray-300">24 yers old</div>
-              </div>
-            </div>
+            <BirthdayRow firstname="Mustapha" lastname="El Masri" age="24" />
+            <BirthdayRow firstname="Mustapha" lastname="El Masri" age="24" />
+            <BirthdayRow firstname="Mustapha" lastname="El Masri" age="24" />
           </div>
         )}
       </div>
@@ -284,21 +269,10 @@ function HomeContent() {
         )}
         {first === 1 && (
           <div className="flex-col space-y-2">
-            <div className="flex justify-between items-center bg-myColors-300 px-4 p-3 rounded-2xl">
-              <div className="flex space-x-3 items-center">
-                <div>
-                  <LinkIcon className="h-6 w-6 text-myColors-600" />
-                </div>
-                <div className="text-sm text-myColors-600">
-                  Fantasy Premier League
-                </div>
-              </div>
-              <div className="text-gray-400 hover:text-white">
-                <a target=" blank" href="https://fantasy.premierleague.com/">
-                  <ExternalLinkIcon className="h-6 w-6" />
-                </a>
-              </div>
-            </div>
+            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
+            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
+            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
+            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
           </div>
         )}
       </div>

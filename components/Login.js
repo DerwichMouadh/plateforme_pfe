@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import bg from "../images/bg.jpg";
+import logo from "../images/logo_violet.png";
 import axios from "axios";
 import { LockClosedIcon, LockOpenIcon, UserIcon } from "@heroicons/react/solid";
 import Link from "next/link";
@@ -47,19 +48,23 @@ function Login() {
         className=" object-cover object-bottom"
       />
       <div className="backdrop-blur-sm bg-white/10 text-white z-50 rounded-3xl shadow-[rgba(0,0,0,0.8)] shadow-xl">
-        <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-10">
           <div className="max-w-md w-full space-y-8">
-            <div>
-              <img
-                className="mx-auto h-12 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                alt="Workflow"
+            <div className="text-center">
+              {/* <img className="mx-auto h-12 w-auto" src={logo} alt="Workflow" /> */}
+              <Image
+                alt="logo"
+                src={logo}
+                priority
+                width="150"
+                height="150"
+                className=" object-contain"
               />
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-white font-fancy">
+              <h2 className="text-3xl font-extrabold text-white font-fancy">
                 Sign in to your plateforme
               </h2>
-              <p className="mt-2 text-center text-sm font-medium text-myColors-600">
-                Dashboard Admin
+              <p className="mt-4 font-medium text-myColors-600">
+                &#34;PRESENCE&#34;
               </p>
             </div>
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -110,9 +115,7 @@ function Login() {
                 </div>
                 <div className="text-sm">
                   <Link href="/SignUp">
-                    <a
-                      className="font-medium text-white hover:text-indigo-500"
-                    >
+                    <a className="font-medium text-white hover:text-indigo-500">
                       Sign Up
                     </a>
                   </Link>

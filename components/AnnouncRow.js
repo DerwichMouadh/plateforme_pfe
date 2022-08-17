@@ -7,6 +7,8 @@ import {
   LinkIcon,
   ClipboardIcon,
   DocumentSearchIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
 } from "@heroicons/react/outline";
 
 function AnnouncRow({ _id, title, description, createdAt }) {
@@ -18,10 +20,16 @@ function AnnouncRow({ _id, title, description, createdAt }) {
       className="flex justify-between items-center bg-myColors-300 px-4 p-3 rounded-2xl cursor-pointer hover:bg-myColors-200"
     >
       <div className="flex-col space-y-1">
-        <div className="text-sm text-myColors-600">{title}</div>
+        <div className="flex space-x-2 items-center">
+          <div>
+            {!openAnnounc && <ChevronDownIcon className="h-4 w-4 text-myColors-600" />}
+            {openAnnounc && <ChevronUpIcon className="h-4 w-4 text-myColors-600" />}
+          </div>
+          <div className="text-sm text-myColors-600">{title}</div>
+        </div>
         {!openAnnounc && (
           <div className="text-xs text-gray-300">
-            {description.substring(0, 43)}...
+            {description.substring(0, 30)}...
           </div>
         )}
         {openAnnounc && (
