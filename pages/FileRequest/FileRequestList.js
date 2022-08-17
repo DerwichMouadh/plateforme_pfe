@@ -10,7 +10,7 @@ import Pagination from "../../components/Pagination";
 import FileRequestListContent from "../../components/FileRequestListContent";
 import { requirePageAuth } from "../../utils/auth";
 
-function FileRequestList({ token }) {
+function FileRequestList({ token, id }) {
   return (
     <div className="flex">
       <Head>
@@ -24,7 +24,7 @@ function FileRequestList({ token }) {
       </Head>
       <Sidebar />
       <div className="bg-myColors-100 h-screen w-7/12 relative">
-        <Navbar navBarTitle_1="Files" navBarTitle_2="File Requests List" />
+        <Navbar navBarTitle_1="Files" navBarTitle_2="File Requests List" id={id}/>
         <FileRequestListContent token={token} />
       </div>
       <RightSidebar />

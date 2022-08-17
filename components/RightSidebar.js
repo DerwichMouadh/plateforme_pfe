@@ -11,15 +11,6 @@ import Link from "next/link";
 import io from "socket.io-client";
 
 function RightSidebar() {
-  let date = new Date();
-  const [currDate, setCurrDate] = useState(date);
-  date.setHours(date.getHours() + 1);
-
-  const updateDate = () => {
-    date = new Date();
-    setCurrDate(date);
-  };
-  setInterval(updateDate, 1000);
 
   return (
     <div className="bg-myColors-100 text-white pt-6 pb-8 px-4 text-sm w-3/12 min-w-[200px] flex flex-col h-screen">
@@ -62,16 +53,8 @@ function RightSidebar() {
           </div>
         </div>
       </div> */}
-      <div className="flex items-center mt-2 px-6 justify-between text-myColors-600 bg-myColors-300 rounded-2xl p-3">
-        <div>
-          <ClockIcon className="h-6 w-6" />
-        </div>
-        {/* <div className=" text-2xl font-semibold">
-          {date.toUTCString().substring(17, 25)}
-        </div> */}
-        <div>
-          <ClockIcon className="h-6 w-6" />
-        </div>
+      <div className="bg-myColors-200 rounded-2xl px-6 py-[14px] text-white">
+        <div className="text-center">{new Date().toUTCString().substring(0, 16)}</div>
       </div>
 
       <div className="flex-col flex-grow scrollbar scrollbar-thumb-hidden scrollbar-track-hidden mt-7">
@@ -83,43 +66,43 @@ function RightSidebar() {
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date(date).toUTCString().substring(0, 22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date(date).toUTCString().substring(0, 22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date(date).toUTCString().substring(0, 22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date(date).toUTCString().substring(0, 22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date(date).toUTCString().substring(0, 22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date(date).toUTCString().substring(0, 22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
           <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date(date).toUTCString().substring(0, 22)}
+            group={new Date().toUTCString().substring(0, 22)}
           />
         </div>
       </div>

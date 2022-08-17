@@ -4,15 +4,21 @@ import {
   ChevronRightIcon,
   BellIcon,
 } from "@heroicons/react/solid";
-import { MenuAlt1Icon, CogIcon, LogoutIcon , UserCircleIcon} from "@heroicons/react/outline";
-import React, { useState } from "react";
+import {
+  MenuAlt1Icon,
+  CogIcon,
+  LogoutIcon,
+  UserCircleIcon,
+} from "@heroicons/react/outline";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import NavbarItem from "./NavbarItem";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
+import RhService from "../services/RhService";
 
-function Navbar({ navBarTitle_1, navBarTitle_2 }) {
+function Navbar({ navBarTitle_1, navBarTitle_2, id }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const logout = () => {
@@ -21,6 +27,22 @@ function Navbar({ navBarTitle_1, navBarTitle_2 }) {
 
     router.push("/");
   };
+
+  const [rh, setRh] = useState([]);
+  const getById = () => {
+    RhService.getById(id)
+      .then((res) => {
+        console.log(res.data.data);
+        console.log("profileUser: " + id);
+        setRh(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getById();
+  }, [id]);
 
   return (
     <div className="flex items-center pt-6">
@@ -38,13 +60,15 @@ function Navbar({ navBarTitle_1, navBarTitle_2 }) {
         <NavbarItem Icon={BellIcon} alert={true} />
         <div onClick={logout} className="relative group">
           <NavbarItem Icon={LogoutIcon} />
-          <div className={` group-hover:block hidden w-[149px] text-center absolute right-0 top-[51px] bg-myColors-200 text-myColors-400 rounded-xl py-1`}>
+          <div
+            className={` group-hover:block hidden w-[149px] text-center absolute right-0 top-[51px] bg-myColors-200 text-myColors-400 rounded-xl py-1`}
+          >
             Log Out
           </div>
         </div>
         <div
           onClick={() => setOpen(!open)}
-          className="text-white flex space-x-2 items-center cursor-pointer pl-5 relative "
+          className="text-white flex space-x-2 items-center cursor-pointer px-2 relative hover:bg-myColors-200 bg-myColors-100 rounded-2xl"
         >
           <Image
             alt=""
@@ -54,7 +78,7 @@ function Navbar({ navBarTitle_1, navBarTitle_2 }) {
             layout="fixed"
             className=" object-cover rounded-full"
           />
-          <p className="">Admin</p>
+          <p className="text-sm">{rh.firstname} {rh.lastname}</p>
           {!open && <ChevronDownIcon className="h-6 w-6" />}
           {open && <ChevronUpIcon className="h-6 w-6" />}
         </div>

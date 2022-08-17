@@ -10,7 +10,7 @@ import Sidebar from "../components/Sidebar";
 import { requirePageAuth } from "../utils/auth";
 import { useEffect, useState } from "react";
 
-function Tasks() {
+function Tasks({id}) {
   const [team1, setTeam1] = useState(true);
   const [team2, setTeam2] = useState(false);
   return (
@@ -31,7 +31,7 @@ function Tasks() {
 
       <Sidebar />
       <div className=" bg-myColors-100 h-screen w-7/12 relative">
-        <Navbar navBarTitle_1="Tasks" navBarTitle_2="Team's tasks" />
+        <Navbar navBarTitle_1="Tasks" navBarTitle_2="Team's tasks" id={id} />
         {/* <ScheduleContent /> */}
         <div className="my-2 py-4 w-full px-8 flex-col absolute space-x-2 top-[106px] rounded-2xl z-50 bg-myColors-200">
           <button

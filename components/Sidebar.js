@@ -13,6 +13,7 @@ import {
   UserGroupIcon,
   ViewGridIcon,
   CogIcon,
+  LightBulbIcon,
 } from "@heroicons/react/outline";
 
 import {
@@ -90,14 +91,14 @@ function Sidebar({ token }) {
       <div className="pl-6">
         <Link href="/Overview">
           <a className="text-2xl font-bold text-white font-fancy">
-          <Image
-                alt="logo"
-                src={logo}
-                priority
-                width="80"
-                height="80"
-                className=" object-contain"
-              />
+            <Image
+              alt="logo"
+              src={logo}
+              priority
+              width="80"
+              height="80"
+              className=" object-contain"
+            />
           </a>
         </Link>
       </div>
@@ -214,17 +215,16 @@ function Sidebar({ token }) {
           </a>
         </div>
       </div>
-      <div className=" bg-myColors-300 rounded-2xl flex items-center space-y-4 min-h-[200px] h-[200px] p-3 text-white">
-        <div className="flex-col space-y-2">
-          <div className=" text-center font-fancy">
-            {quotes.text}
+      <div className=" bg-myColors-300 rounded-2xl flex items-center space-y-4 h-1/2 p-3 text-white">
+        <div className="flex-col space-y-6">
+          <div className="">
+            <LightBulbIcon className="h-10 w-10 mx-auto" />
           </div>
-          <div className="text-right text-sm text-myColors-600">{quotes.author}</div>
+          <div className=" text-center font-fancy">{quotes.text}</div>
+          <div className="text-right text-xs text-myColors-600">
+            {quotes.author}
+          </div>
         </div>
-      </div>
-      <div className="bg-myColors-300 rounded-2xl flex-col space-y-4 py-6 p-3 text-white">
-        <div className="text-center">{date}</div>
-        {/* <div className="text-center text-2xl text-myColors-600">{time}</div> */}
       </div>
     </div>
   );
