@@ -7,7 +7,7 @@ import {
   ColumnDirective,
 } from "@syncfusion/ej2-react-kanban";
 
-function KanbanContent({ _id }) {
+function KanbanContent({ id }) {
   const kanbanGrid = [
     { headerText: "To Do", keyField: "Open", allowToggle: true },
 
@@ -22,6 +22,29 @@ function KanbanContent({ _id }) {
 
     { headerText: "Done", keyField: "Close", allowToggle: true },
   ];
+  const [team, setTeam] = useState({});
+  useEffect(() => {
+    getTeamByUser();
+  }, []);
+
+  const getTeamByUser = () => {
+    const config = {
+      method: "GET",
+      url: `http://localhost:5000/sections/user/${id}`,
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
+    };
+    axios(config)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          setTeam(data.data[0]);
+        }
+      })
+      .catch((err) => {
+        console.error("err", err);
+      });
+  };
 
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
@@ -31,7 +54,7 @@ function KanbanContent({ _id }) {
   const getAll = () => {
     const config = {
       method: "GET",
-      url: `http://localhost:5000/sections/62c45c891dd8723403a1d49c`,
+      url: `http://localhost:5000/tasks/section/${team._id}`,
       // headers: {
       //   Authorization: `Bearer ${token}`,
       // },
@@ -39,7 +62,7 @@ function KanbanContent({ _id }) {
     axios(config)
       .then(({ status, data }) => {
         if (status === 200) {
-          setTasks(data.data.tasks);
+          setTasks(data.data);
         }
       })
       .catch((err) => {
@@ -47,6 +70,8 @@ function KanbanContent({ _id }) {
       });
   };
 
+  console.log("tasks");
+  console.log(tasks);
 
   const kanbanData = [
     {

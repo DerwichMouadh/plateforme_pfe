@@ -57,6 +57,31 @@ function ProfileUserContent({ id }) {
       });
   };
 
+  const [team, setTeam] = useState({});
+  useEffect(() => {
+    getTeamByUser();
+  }, []);
+  const getTeamByUser = () => {
+    const config = {
+      method: "GET",
+      url: `http://localhost:5000/sections/user/${id}`,
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
+    };
+    axios(config)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          setTeam(data.data[1]);
+          
+        }
+      })
+      .catch((err) => {
+        console.error("err", err);
+      });
+  };
+
+
   let convDate = new Date(rh.date_of_birth);
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -196,15 +221,13 @@ function ProfileUserContent({ id }) {
               title="Date of Birth"
               info={convDate.toUTCString().substring(5, 16)}
             />
-            <div className="flex col-span-2 space-x-2 bg-myColors-300 rounded-2xl p-2 text-myColors-600">
+            <div className="flex col-span-2 space-x-2 bg-myColors-300 rounded-2xl p-3 text-myColors-600">
               <div>
                 <UserGroupIcon className="h-6 w-6" />
               </div>
               <div>
                 <h2 className=" font-light">Teams</h2>
-                <div className="text-white flex-col space-y-4 mt-4">
-                  
-                </div>
+                <div className="text-white flex-col space-y-4 mt-4">{team.name}</div>
               </div>
             </div>
           </div>

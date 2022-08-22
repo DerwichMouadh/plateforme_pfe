@@ -8,11 +8,36 @@ import RightSidebar from "../components/RightSidebar";
 import ScheduleContent from "../components/ScheduleContent";
 import Sidebar from "../components/Sidebar";
 import { requirePageAuth } from "../utils/auth";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function Tasks({id}) {
+function Tasks({ id }) {
   const [team1, setTeam1] = useState(true);
   const [team2, setTeam2] = useState(false);
+
+  const [team, setTeam] = useState({});
+  useEffect(() => {
+    getTeamByUser();
+  }, []);
+  const getTeamByUser = () => {
+    const config = {
+      method: "GET",
+      url: `http://localhost:5000/sections/user/${id}`,
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
+    };
+    axios(config)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          setTeam(data.data[0]);
+        }
+      })
+      .catch((err) => {
+        console.error("err", err);
+      });
+  };
+  
   return (
     <div className="flex">
       <Head>
@@ -31,34 +56,10 @@ function Tasks({id}) {
 
       <Sidebar />
       <div className=" bg-myColors-100 h-screen w-7/12 relative">
-        <Navbar navBarTitle_1="Tasks" navBarTitle_2="Team's tasks" id={id} />
+        <Navbar navBarTitle_1="Tasks" navBarTitle_2={team.name} id={id} />
         {/* <ScheduleContent /> */}
-        <div className="my-2 py-4 w-full px-8 flex-col absolute space-x-2 top-[106px] rounded-2xl z-50 bg-myColors-200">
-          <button
-            className={`${
-              team1 ? "bg-myColors-600" : "bg-myColors-500"
-            } text-white p-1 px-4  rounded-md hover:bg-myColors-600`}
-            onClick={() => {
-              setTeam1(true);
-              setTeam2(false);
-            }}
-          >
-            Team Alpha
-          </button>
-          <button
-            className={`${
-              team2 ? "bg-myColors-600" : "bg-myColors-500"
-            } text-white p-1 px-4  rounded-md hover:bg-myColors-600`}
-            onClick={() => {
-              setTeam2(true);
-              setTeam1(false);
-            }}
-          >
-            Team Beta
-          </button>
-        </div>
+    
         {team1 && <KanbanContent />}
-        {team2 && <KanbanContent2 />}
       </div>
       <RightSidebar />
     </div>

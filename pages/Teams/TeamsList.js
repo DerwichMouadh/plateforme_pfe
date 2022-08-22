@@ -1,32 +1,24 @@
+import React, { useEffect, useState } from "react";
+import { PencilAltIcon, XCircleIcon } from "@heroicons/react/outline";
+import UserRow from "./../../components/UserRow";
+import { requirePageAuth } from "../../utils/auth";
+import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
-import HomeContent from "../../components/HomeContent";
-import KanbanContent from "../../components/KanbanContent";
 import Navbar from "../../components/Navbar";
 import RightSidebar from "../../components/RightSidebar";
-import ScheduleContent from "../../components/ScheduleContent";
 import Sidebar from "../../components/Sidebar";
-import { requirePageAuth } from "../../utils/auth";
-import {
-  UserGroupIcon,
-  DotsVerticalIcon,
-  ClipboardCheckIcon,
-} from "@heroicons/react/solid";
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import TeamCard from "../../components/TeamCard";
-import axios from "axios";
 
-function TeamsList() {
-  const [teams, setTeams] = useState([]);
+function TeamsList({ token, id }) {
+
+  const [team, setTeam] = useState({});
   useEffect(() => {
-    getAll();
+    getTeamByUser();
   }, []);
-
-  const getAll = () => {
+  const getTeamByUser = () => {
     const config = {
       method: "GET",
-      url: "http://localhost:5000/sections",
+      url: `http://localhost:5000/sections/user/${id}`,
       // headers: {
       //   Authorization: `Bearer ${token}`,
       // },
@@ -34,13 +26,15 @@ function TeamsList() {
     axios(config)
       .then(({ status, data }) => {
         if (status === 200) {
-          setTeams(data.data);
+          setTeam(data.data[0]);
+          
         }
       })
       .catch((err) => {
         console.error("err", err);
       });
   };
+
   return (
     <div className="flex">
       <Head>
@@ -51,33 +45,47 @@ function TeamsList() {
           href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         ></link>
-        <link
-          href="https://cdn.syncfusion.com/ej2/20.1.55/material.css"
-          rel="stylesheet"
-        ></link>
       </Head>
 
       <Sidebar />
       <div className=" bg-myColors-100 h-screen w-7/12 relative">
-        <Navbar navBarTitle_1="Teams" navBarTitle_2="" />
-        {/* <KanbanContent /> */}
-        <div className="bg-myColors-200 rounded-2xl w-7/12 fixed top-[82px] my-8 bottom-0 p-8 text-white scrollbar scrollbar-thumb-hidden scrollbar-track-hidden grid grid-cols-2 gap-4">
-          {teams?.map(({ _id, name, employees, teamLeader, tasks }) => (
-            <TeamCard
-              id={_id}
-              _id={_id}
-              getAll={getAll}
-              key={_id}
-              name={name}
-              employees={employees}
-              teamLeader={teamLeader}
-              tasks={tasks}
-            />
-          ))}
+        <Navbar navBarTitle_1="Team Members" navBarTitle_2={team.name} id={id} />
+        <div className="bg-myColors-200 rounded-2xl w-7/12 fixed top-[82px] my-8 mb-24 -bottom-16 pt-16 pb-24 p-8 text-white scrollbar scrollbar-thumb-hidden scrollbar-track-hidden">
+      <div className="flex-col space-y-2">
+      <div className=" rounded-2xl bg-myColors-200">
+          <div className="flex text-white">
+            <h4 className="w-1/12"></h4>
+            <h4 className="w-5/12">Name</h4>
+            <h4 className="w-5/12">Designation</h4>
+            <h4 className="w-1/12 -ml-2">Action</h4>
+          </div>
+          <div className="h-[1px] w-full bg-white"></div>
         </div>
+        {team.employees?.map(({ _id, firstname, lastname, date_of_birth, gender, role, image, email, location, designation , ...section}, i) => (
+          <UserRow
+            id={_id}
+            key={_id}
+            number={i+1}
+            firstname={firstname}
+            lastname={lastname}
+            location={location}
+            designation={designation}
+            date_of_birth={date_of_birth}
+            email={email}
+            gender={gender}
+            _id={_id}
+            image={image}
+            role={role}
+            token={token}
+            section={section}
+          />
+        ))}
+      </div>
+    </div>
       </div>
       <RightSidebar />
     </div>
+    
   );
 }
 

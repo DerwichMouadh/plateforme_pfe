@@ -55,12 +55,11 @@ function UserRow({
   };
 
   //////
-  console.log("yyyyyyyyy"+ section);
 
   return (
     <div className="flex items-center text-xs bg-myColors-300 hover:bg-myColors-400 py-1 rounded-xl cursor-pointer">
       <h4 className="w-1/12 text-center">{number}</h4>
-      <div className="w-4/12 flex items-center space-x-2">
+      <div className="w-5/12 flex items-center space-x-2">
         <img
           alt=""
           src={"http://localhost:5000/getImage/" + image}
@@ -73,15 +72,14 @@ function UserRow({
           {firstname} {lastname}
         </h4>
       </div>
-      <h4 className="w-3/12">{designation}</h4>
-      <h4 className="w-2/12">{section.name}</h4>
-      <div className="w-2/12 flex">
+      <h4 className="w-5/12">{designation}</h4>
+      <div className="w-1/12">
         <Link href={"/Users/ProfileUser/" + _id} key={_id}>
           <a>
             <ExternalLinkIcon className="h-9 w-9 hover:bg-myColors-200 text-yellow-500 p-2 rounded-xl" />
           </a>
         </Link>
-        <Link href={"/Users/UpdateUser/" + _id} key={_id}>
+        {/* <Link href={"/Users/UpdateUser/" + _id} key={_id}>
           <a>
             <PencilAltIcon className="h-9 w-9 hover:bg-myColors-200 text-myColors-600 p-2 rounded-xl" />
           </a>
@@ -89,7 +87,7 @@ function UserRow({
         <TrashIcon
           className="h-9 w-9 hover:bg-myColors-200 text-red-500 p-2 rounded-xl"
           onClick={(e) => deleteRh(id)}
-        />
+        /> */}
       </div>
     </div>
   );

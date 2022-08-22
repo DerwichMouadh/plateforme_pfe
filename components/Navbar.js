@@ -61,9 +61,9 @@ function Navbar({ navBarTitle_1, navBarTitle_2, id }) {
         <div onClick={logout} className="relative group">
           <NavbarItem Icon={LogoutIcon} />
           <div
-            className={` group-hover:block hidden w-[149px] text-center absolute right-0 top-[51px] bg-myColors-200 text-myColors-400 rounded-xl py-1`}
+            className={` group-hover:block hidden text-xs text-center absolute right-0 top-[51px] bg-myColors-200 text-myColors-400 rounded px-1`}
           >
-            Log Out
+            LogOut
           </div>
         </div>
         <div
