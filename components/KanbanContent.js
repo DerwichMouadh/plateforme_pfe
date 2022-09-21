@@ -7,7 +7,7 @@ import {
   ColumnDirective,
 } from "@syncfusion/ej2-react-kanban";
 
-function KanbanContent({ id }) {
+function KanbanContent({ id, teamId }) {
   const kanbanGrid = [
     { headerText: "To Do", keyField: "Open", allowToggle: true },
 
@@ -22,29 +22,6 @@ function KanbanContent({ id }) {
 
     { headerText: "Done", keyField: "Close", allowToggle: true },
   ];
-  const [team, setTeam] = useState({});
-  useEffect(() => {
-    getTeamByUser();
-  }, []);
-
-  const getTeamByUser = () => {
-    const config = {
-      method: "GET",
-      url: `http://localhost:5000/sections/user/${id}`,
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
-    };
-    axios(config)
-      .then(({ status, data }) => {
-        if (status === 200) {
-          setTeam(data.data[0]);
-        }
-      })
-      .catch((err) => {
-        console.error("err", err);
-      });
-  };
 
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
@@ -54,7 +31,7 @@ function KanbanContent({ id }) {
   const getAll = () => {
     const config = {
       method: "GET",
-      url: `http://localhost:5000/tasks/section/${team._id}`,
+      url: `http://localhost:5000/tasks/section/62c45e77ceca396d41d99f0b`,
       // headers: {
       //   Authorization: `Bearer ${token}`,
       // },

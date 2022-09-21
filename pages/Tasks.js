@@ -37,6 +37,8 @@ function Tasks({ id }) {
         console.error("err", err);
       });
   };
+  console.log("teamId");
+  console.log(team._id);
   
   return (
     <div className="flex">
@@ -59,7 +61,7 @@ function Tasks({ id }) {
         <Navbar navBarTitle_1="Tasks" navBarTitle_2={team.name} id={id} />
         {/* <ScheduleContent /> */}
     
-        {team1 && <KanbanContent />}
+        {team1 && <KanbanContent teamId={team._id} />}
       </div>
       <RightSidebar />
     </div>

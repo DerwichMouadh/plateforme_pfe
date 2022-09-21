@@ -75,16 +75,16 @@ function Sidebar({ token }) {
   filtredFiles = files.filter((file) => file.status === "In Progress");
   let num = filtredFiles.length;
 
-  // Quotes
-  // const url = "https://type.fit/api/quotes";
-  // const [quotes, setQuotes] = useState([]);
-  // useEffect(() => {
-  //   let n = Math.floor(Math.random() * (5 - 0 + 1)) + 0;
-  //   axios.get(url).then((res) => {
-  //     setQuotes(res.data[n]);
-  //     console.log(res.data[n]);
-  //   });
-  // }, [url]);
+  //Quotes;
+  const url = "https://type.fit/api/quotes";
+  const [quotes, setQuotes] = useState([]);
+  useEffect(() => {
+    let n = Math.floor(Math.random() * (5 - 0 + 1)) + 0;
+    axios.get(url).then((res) => {
+      setQuotes(res.data[n]);
+      console.log(res.data[n]);
+    });
+  }, [url]);
 
   return (
     <div className="bg-myColors-100 p-4 pb-8 text-sm font-medium w-2/12 min-w-[200px] flex flex-col space-y-3 h-screen">
@@ -215,14 +215,14 @@ function Sidebar({ token }) {
           </a>
         </div>
       </div>
-      <div className=" bg-myColors-300 rounded-2xl flex items-center space-y-4 h-1/2 p-3 text-white">
+      <div className=" bg-myColors-300 rounded-2xl flex items-center space-y-4 h-[250px] min-h-[250px] p-3 text-white">
         <div className="flex-col space-y-6">
           <div className="">
             <LightBulbIcon className="h-10 w-10 mx-auto" />
           </div>
-          {/* <div className=" text-center font-fancy">{quotes.text}</div> */}
+          <div className=" text-center font-fancy">{quotes.text}</div>
           <div className="text-right text-xs text-myColors-600">
-            {/* {quotes.author} */}
+            {quotes.author}
           </div>
         </div>
       </div>

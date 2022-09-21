@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import Image from "next/image";
 import bg from "../images/bg.jpg";
 import authService from "../services/authService";
@@ -6,73 +6,60 @@ import route from "next/router";
 import { ArrowCircleLeftIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/router";
 
-
+import Swal from "sweetalert2";
 function SignUp() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("");
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    var formData = new FormData();
-    formData.append("firstname", firstname);
-    formData.append("lastname", lastname);
-    formData.append("email", email);
-    formData.append("password", password);
-    //form.append("designation", data.designation);
-    formData.append("location", location);
-    //formData.append("date_of_birth", data.date_of_birth);
-    //form.append("gender", data.gender);
-
-    const config = {
-      method: "POST",
-      url: `http://localhost:5000/auth/register`,
-
-      headers: {
-        //Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-      data: formData,
-    };
-    axios(config)
-      .then(({ status }) => {
-        if (status === 200) {
-          console.log("sahha mustapha");
-        }
-      })
-      .catch((err) => {
-        if (err.response) {
-          const { status, data } = err.response;
-        }
-      });
-  };
-  const handleInputChange = (e, fn) => {
-    fn(e.target.value);
-    // markInputAsTrue(e.target.id);
-  };
-
-  const [input, setInput] = useState({
-    password: "",
-    confirmPassword: "",
-  });
-
+  const router = useRouter();
+ 
   const [error, setError] = useState({
     password: "",
     confirmPassword: "",
   });
+  const input1 = useRef();
+  const input2 = useRef();
+  const input3 = useRef();
+  const input4 = useRef();
+  const input5 = useRef();
+  const input6 = useRef();
+  const input69 = useRef();
+  const input7= useRef();
+  const input8 = useRef();
+  
+  const [user, setUser] = useState({ password: "", email: "" ,designation:"", location:"", date_of_birth:"", gender:"" ,firstname:"",lastname:""});
 
-  const onInputChange = (e) => {
-    const { name, value } = e.target;
-    setInput((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    validateInput(e);
-  };
+  
 
+    function handleSubmit(e) {
+      e.preventDefault();
+      const config = {
+        method: "post",
+        url: "http://localhost:5000/auth/register",
+        headers: {},
+        data: user,
+      };
+      axios(config)
+        .then((response) => {
+          router.push("/")
+          console.log(JSON.stringify(response.data));
+          
+        })
+        .catch((error) => {
+          console.log("error")
+        });
+    }
+ 
+function handleInputChange(e, setUser) {
+      const fieldName = e.target.name;
+      setUser((prevUser) => {
+        return { ...prevUser, [fieldName]: e.target.value };
+      });
+    }
+    
+  
+
+  
   const validateInput = (e) => {
     let { name, value } = e.target;
     setError((prev) => {
@@ -149,7 +136,7 @@ function SignUp() {
               <div className="mt-10 sm:mt-0">
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                   <div className="mt-5 md:mt-0 md:col-span-3">
-                    <form action="#" method="POST" onSubmit={onSubmitHandler}>
+                    <form   onSubmit={handleSubmit}>
                       <div className="overflow-hidden rounded-xl">
                         <div className="px-4 py-5 bg-transparent sm:p-6">
                           <div className="grid grid-cols-8 gap-6">
@@ -162,13 +149,17 @@ function SignUp() {
                               </label>
                               <input
                                 type="text"
+                                ref={input3}
+                              
                                 name="firstname"
-                                value={firstname}
+                                id="firstname"
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
+                              
                                 //onChange={onChangeHandler}
-                                onChange={(e) =>
-                                  handleInputChange(e, setFirstname)
-                                }
-                                id="first-name"
+                                
+                        
                                 autoComplete="given-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
@@ -182,14 +173,14 @@ function SignUp() {
                                 Last name
                               </label>
                               <input
-                                type="text"
-                                name="lastname"
-                                value={lastname}
-                                //onChange={onChangeHandler}
-                                onChange={(e) =>
-                                  handleInputChange(e, setLastname)
-                                }
-                                id="last-name"
+                                 type="text"
+                                 ref={input4}
+                               
+                                 name="lastname"
+                                 id="lastname"
+                                 onChange={(e) => {
+                                   handleInputChange(e, setUser);
+                                 }}
                                 autoComplete="family-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
@@ -203,12 +194,19 @@ function SignUp() {
                                 Email address
                               </label>
                               <input
-                                type="text"
-                                name="email"
-                                value={email}
+                              ref={input1}
+                              type="email"
+                              name="email"
+                              id="email"
+                              onChange={(e) => {
+                                handleInputChange(e, setUser);
+                              }}
+                                
+                               
+                                
                                 //onChange={onChangeHandler}
-                                onChange={(e) => handleInputChange(e, setEmail)}
-                                id="email-address"
+                              
+                             
                                 autoComplete="email"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
@@ -221,13 +219,16 @@ function SignUp() {
                                 Password
                               </label>
                               <input
+                              ref={input2}
                                 type="password"
                                 name="password"
-                                value={password}
+                                
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
+                                
                                 //onChange={onChangeHandler}
-                                onChange={(e) =>
-                                  handleInputChange(e, setPassword)
-                                }
+                               
                                 // value={input.password}
                                 // onChange={pass}
                                 // onBlur={validateInput}
@@ -275,9 +276,16 @@ function SignUp() {
                               >
                                 Designation
                               </label>
-                              <select
-                                id="designation"
+                              {/* <select
+                                type="text"
+                                ref={input5}
+                              
                                 name="designation"
+                                id="designation"
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
+                                
                                 //onChange={onChangeHandler}
                                 autoComplete="country-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -303,7 +311,20 @@ function SignUp() {
                                 <option className="text-gray-500 bg-gray-300">
                                   Business Analyst
                                 </option>
-                              </select>
+                              </select> */}
+                              <input
+                               type="text"
+                               ref={input69}
+                             
+                               name="designation"
+                               id="designation"
+                               onChange={(e) => {
+                                 handleInputChange(e, setUser);
+                               }}
+                              
+                                autoComplete="address-level2"
+                                className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
+                              />
                             </div>
 
                             <div className="col-span-6 sm:col-span-6 lg:col-span-2">
@@ -314,14 +335,15 @@ function SignUp() {
                                 Location
                               </label>
                               <input
-                                type="text"
-                                name="location"
-                                value={location}
-                                //onChange={onChangeHandler}
-                                onChange={(e) =>
-                                  handleInputChange(e, setLocation)
-                                }
-                                id="city"
+                               type="text"
+                               ref={input6}
+                             
+                               name="location"
+                               id="location"
+                               onChange={(e) => {
+                                 handleInputChange(e, setUser);
+                               }}
+                              
                                 autoComplete="address-level2"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
@@ -338,13 +360,20 @@ function SignUp() {
                                 type="date"
                                 name="date_of_birth"
                                 //onChange={onChangeHandler}
-                                id="region"
+                              
+                                ref={input7}
+                              
+                                
+                               
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
                                 autoComplete="address-level1"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
                             </div>
 
-                            <div className="col-span-6 sm:col-span-2">
+                            {/* <div className="col-span-6 sm:col-span-2">
                               <label
                                 htmlFor="country"
                                 className="block text-sm font-medium text-gray-200 pl-4"
@@ -352,8 +381,14 @@ function SignUp() {
                                 Gender
                               </label>
                               <select
-                                id="country"
+                                type="text"
+                                ref={input8}
+                              
                                 name="gender"
+                                id="designation"
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
                                 //onChange={onChangeHandler}
                                 autoComplete="country-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
@@ -365,7 +400,7 @@ function SignUp() {
                                   Female
                                 </option>
                               </select>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                         <div className="px-4 py-3 bg-transparent text-center sm:px-6">
@@ -387,6 +422,6 @@ function SignUp() {
       </div>
     </div>
   );
-}
 
+}
 export default SignUp;

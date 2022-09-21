@@ -19,12 +19,12 @@ import cookie from "js-cookie";
 import RhService from "../services/RhService";
 
 function Navbar({ navBarTitle_1, navBarTitle_2, id }) {
+  
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const logout = () => {
     cookie.remove("token");
     cookie.remove("email");
-
     router.push("/");
   };
 
@@ -40,6 +40,7 @@ function Navbar({ navBarTitle_1, navBarTitle_2, id }) {
         console.log(err);
       });
   };
+
   useEffect(() => {
     getById();
   }, [id]);

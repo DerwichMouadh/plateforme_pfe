@@ -33,30 +33,6 @@ function ProfileUserContent({ id }) {
     getById();
   }, [id]);
 
-  const [teams, setTeams] = useState([]);
-  useEffect(() => {
-    getAll();
-  }, []);
-
-  const getAll = () => {
-    const config = {
-      method: "GET",
-      url: "http://localhost:5000/sections",
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
-    };
-    axios(config)
-      .then(({ status, data }) => {
-        if (status === 200) {
-          setTeams(data.data);
-        }
-      })
-      .catch((err) => {
-        console.error("err", err);
-      });
-  };
-
   const [team, setTeam] = useState({});
   useEffect(() => {
     getTeamByUser();
@@ -72,8 +48,7 @@ function ProfileUserContent({ id }) {
     axios(config)
       .then(({ status, data }) => {
         if (status === 200) {
-          setTeam(data.data[1]);
-          
+          setTeam(data.data[0]);
         }
       })
       .catch((err) => {
@@ -227,7 +202,9 @@ function ProfileUserContent({ id }) {
               </div>
               <div>
                 <h2 className=" font-light">Teams</h2>
-                <div className="text-white flex-col space-y-4 mt-4">{team.name}</div>
+                <div className="text-white flex-col space-y-4 mt-4">
+                  {team.name}
+                </div>
               </div>
             </div>
           </div>

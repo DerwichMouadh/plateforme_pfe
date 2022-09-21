@@ -53,11 +53,11 @@ function RightSidebar() {
           </div>
         </div>
       </div> */}
-      <div className="bg-myColors-200 rounded-2xl px-6 py-[14px] text-white">
+      <div className="bg-myColors-300 rounded-2xl px-6 py-[14px] text-white">
         <div className="text-center">{new Date().toUTCString().substring(0, 16)}</div>
       </div>
 
-      <div className="flex-col flex-grow scrollbar scrollbar-thumb-hidden scrollbar-track-hidden mt-7">
+      <div className="flex-col flex-grow scrollbar scrollbar-thumb-hidden scrollbar-track-hidden mt-12">
         <h2 className="fixed bg-myColors-100 font-semibold text-xl w-full pb-4 z-50 font-fancy">
           Your team&apos;s chat
         </h2>
