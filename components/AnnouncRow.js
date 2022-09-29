@@ -22,8 +22,12 @@ function AnnouncRow({ _id, title, description, createdAt }) {
       <div className="flex-col space-y-1">
         <div className="flex space-x-2 items-center">
           <div>
-            {!openAnnounc && <ChevronDownIcon className="h-4 w-4 text-myColors-600" />}
-            {openAnnounc && <ChevronUpIcon className="h-4 w-4 text-myColors-600" />}
+            {!openAnnounc && (
+              <ChevronDownIcon className="h-4 w-4 text-myColors-600" />
+            )}
+            {openAnnounc && (
+              <ChevronUpIcon className="h-4 w-4 text-myColors-600" />
+            )}
           </div>
           <div className="text-sm text-myColors-600">{title}</div>
         </div>

@@ -25,9 +25,9 @@ import Link from "next/link";
 import axios from "axios";
 
 import Image from "next/image";
-import logo from "../images/logo_green.png";
+import logo from "../images/logo_1.png";
 
-function Sidebar({ token }) {
+function Sidebar({ token, id }) {
   let time = new Date().toLocaleTimeString();
   let date = new Date().toUTCString().substring(0, 16);
   const [currTime, setCurrTime] = useState(time);
@@ -50,13 +50,13 @@ function Sidebar({ token }) {
   let filtredFiles = [];
 
   useEffect(() => {
-    getallInProgress();
+    getall();
   }, []);
 
-  const getallInProgress = () => {
+  const getall = () => {
     const config = {
       method: "GET",
-      url: `http://localhost:5000/filerequests/inprogress`,
+      url: `http://localhost:5000/filerequests/all`,
       // headers: {
       //   Authorization: `Bearer ${token}`,
       // },
@@ -71,9 +71,10 @@ function Sidebar({ token }) {
         console.error("err", err);
       });
   };
-
+  let user = [];
   filtredFiles = files.filter((file) => file.status === "In Progress");
-  let num = filtredFiles.length;
+  user = filtredFiles.filter((file) => file.user._id === id);
+  let num = user.length;
 
   //Quotes;
   const url = "https://type.fit/api/quotes";

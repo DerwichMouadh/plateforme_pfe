@@ -25,7 +25,7 @@ function FileRequestList({ token, id }) {
       <Sidebar />
       <div className="bg-myColors-100 h-screen w-7/12 relative">
         <Navbar navBarTitle_1="Files" navBarTitle_2="File Requests List" id={id}/>
-        <FileRequestListContent token={token} />
+        <FileRequestListContent token={token} id={id} />
       </div>
       <RightSidebar />
     </div>

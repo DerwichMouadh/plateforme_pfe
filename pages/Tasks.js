@@ -56,7 +56,7 @@ function Tasks({ id }) {
         ></link>
       </Head>
 
-      <Sidebar />
+      <Sidebar id={id} />
       <div className=" bg-myColors-100 h-screen w-7/12 relative">
         <Navbar navBarTitle_1="Tasks" navBarTitle_2={team.name} id={id} />
         {/* <ScheduleContent /> */}

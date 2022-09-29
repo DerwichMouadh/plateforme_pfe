@@ -62,48 +62,37 @@ function RightSidebar() {
           Your team&apos;s chat
         </h2>
         <div className="pt-9">
-          <RowCard
+          {/* <RowCard
             Icon={UserIcon}
             fullName="Mustapha El Masri"
             msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
             group={new Date().toUTCString().substring(0, 22)}
+          /> */}
+          <RowCard
+            Icon={UserIcon}
+            fullName="Karim Benzema"
+            msg="I faced the exact issue 🤔🤔"
+            group="Thu, 29 Sep 2022 16:15"
           />
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri"
-            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            fullName="Scarlett Johansson"
+            msg="I get the error Error parsing token: Token used before issued and a 401 on the request to the api"
+            group="Thu, 29 Sep 2022 16:13"
           />
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri"
-            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            fullName="Scarlett Johansson"
+            msg="I have successfully setup authentication with Auth0 however when Auth0 redirects back to my callback, I then can't access ajax endpoints"
+            group="Thu, 29 Sep 2022 16:12"
           />
           <RowCard
             Icon={UserIcon}
-            fullName="Mustapha El Masri"
-            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
+            fullName="Scarlett Johansson"
+            msg="Hey everyone 😊"
+            group="Thu, 29 Sep 2022 16:12"
           />
-          <RowCard
-            Icon={UserIcon}
-            fullName="Mustapha El Masri"
-            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
-          />
-          <RowCard
-            Icon={UserIcon}
-            fullName="Mustapha El Masri"
-            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
-          />
-          <RowCard
-            Icon={UserIcon}
-            fullName="Mustapha El Masri"
-            msg="Liverpool and Man City stars show why they are most popular premium picks in 2022/23 Fantasy."
-            group={new Date().toUTCString().substring(0, 22)}
-          />
+          
         </div>
       </div>
       <div className="flex cursor-pointer items-center rounded-xl bg-myColors-200 mt-4">

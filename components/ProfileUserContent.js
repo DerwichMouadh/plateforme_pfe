@@ -11,7 +11,19 @@ import {
   CalendarIcon,
   UserGroupIcon,
 } from "@heroicons/react/solid";
-import { ChatIcon, PencilAltIcon } from "@heroicons/react/outline";
+import { AtSymbolIcon, DocumentTextIcon } from "@heroicons/react/solid";
+import {
+  CheckCircleIcon,
+  MinusCircleIcon,
+  ExclamationCircleIcon,
+  TrashIcon,
+  ExternalLinkIcon,
+} from "@heroicons/react/solid";
+import {
+  ChatIcon,
+  PencilAltIcon,
+  ClipboardIcon,
+} from "@heroicons/react/outline";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
@@ -56,7 +68,6 @@ function ProfileUserContent({ id }) {
       });
   };
 
-
   let convDate = new Date(rh.date_of_birth);
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -66,28 +77,38 @@ function ProfileUserContent({ id }) {
   let a = "1/4";
 
   return (
-    <div className="bg-myColors-200 flex-col space-y-4  rounded-2xl w-7/12 fixed top-[82px] my-8 bottom-0 p-8 text-white scrollbar scrollbar-thumb-hidden scrollbar-track-hidden text-sm">
-      {/* <div>id: {id}</div>
+    <div className="bg-myColors-200 flex-col space-y-2 rounded-2xl w-7/12 fixed top-[82px] my-8 bottom-0 p-8 text-white scrollbar scrollbar-thumb-hidden scrollbar-track-hidden text-sm">
+      {/* <div>id: {_id}</div>
       <div>{rh.firstname}</div> */}
 
       {/* Header */}
-      <div className=" bg-myColors-700 flex justify-between space-x-4 items-center px-8 p-4 rounded-2xl">
-        <div className="flex space-x-6">
-          <div className="bg-white rounded-full w-20 h-20"></div>
+      <div className="bg-myColors-700 flex justify-between space-x-4 items-center px-8 p-4 rounded-2xl">
+        <div className="flex space-x-4">
+          <div className="">
+            <img
+              alt=""
+              src={"http://localhost:5000/getImage/" + rh.image}
+              width={35}
+              height={35}
+              layout="fixed"
+              className=" object-cover rounded-full"
+            />
+          </div>
           <div className="flex-col space-y-2">
             <div className="flex space-x-2 items-center">
               <div className=" text-2xl">
                 {rh.firstname} {rh.lastname}
               </div>
-              <div className="bg-green-500 w-2 h-2 rounded-full"></div>
             </div>
             <div className="flex-col">
-              <h2 className="text-myColors-600 font-light">Employee ID:</h2>
-              <h2>#{id}</h2>
+              <h2 className="text-myColors-600 font-light text-sm">
+                Employee ID:
+              </h2>
+              <h2 className="text-sm">#{id}</h2>
             </div>
           </div>
         </div>
-        <div className="">
+        {/* <div className="flex flex-grow space-x-2 pl-4">
           <div className="w-1 h-full"></div>
           <div className="flex-col space-y-2 text-myColors-600">
             <div className="flex items-center space-x-2">
@@ -96,12 +117,26 @@ function ProfileUserContent({ id }) {
               <h2 className="text-white">{rh.designation}</h2>
             </div>
             <div className="flex items-center space-x-2">
-              <LoginIcon className="w-4 h-4" />
+              <BriefcaseIcon className="w-4 h-4" />
               <h2 className="font-light">Last Login:</h2>
               <h2 className="text-white">5 min. ago</h2>
             </div>
           </div>
-        </div>
+        </div> */}
+        {/* <div className="flex-col space-y-2">
+          <Link href={"/Users/AddToTeam/" + _id} key={_id}>
+            <div className=" rounded-xl px-4 bg-myColors-400 text-green-300 hover:text-myColors-400 hover:bg-myColors-600 flex space-x-2 items-center p-2 cursor-pointer">
+              <UserGroupIcon className="h-6 w-6" />
+              <a>Add to Team</a>
+            </div>
+          </Link>
+          <Link href={"/Users/UpdateUser/" + _id} key={_id}>
+            <div className=" rounded-xl px-4 bg-myColors-400 text-green-300 hover:text-myColors-400 hover:bg-myColors-600 flex space-x-2 items-center p-2 cursor-pointer">
+              <PencilAltIcon className="h-6 w-6" />
+              <a>Update User</a>
+            </div>
+          </Link>
+        </div> */}
       </div>
 
       {/* Navbar */}
@@ -114,7 +149,7 @@ function ProfileUserContent({ id }) {
       </div> */}
 
       {/* Content */}
-      <div className="grid grid-col-3 grid-flow-col gap-4">
+      <div className="grid grid-col-3 grid-flow-col gap-2">
         <div className="row-span-3 bg-myColors-700 p-6 rounded-xl">
           <h2 className="font-fancy mb-4">Personal Information</h2>
           <div className="flex-col space-y-2">
@@ -133,81 +168,42 @@ function ProfileUserContent({ id }) {
             <ProfileUserRow
               Icon={PhoneIcon}
               title="Phone Number"
-              info="+21623207094"
+              info="716-352-7105"
+            />
+            <ProfileUserRow
+              Icon={AtSymbolIcon}
+              title="Email address"
+              info={rh.email}
             />
           </div>
         </div>
 
-        <div className="col-span-2 bg-myColors-700 p-6 rounded-xl">
-          <h2 className="font-fancy mb-4">Your team&apos;s tasks</h2>
-          <div className="flex-col space-y-4">
-            <div className="flex-col space-y-1">
-              <h2>Task 1</h2>
-              <div className="flex items-center border-2 border-green-500 w-full h-3 rounded-full">
-                <div
-                  className={`bg-green-500 rounded-full w-${a} h-3 -ml-[1px]`}
-                ></div>
-              </div>
-              <p className="text-xs text-gray-400">
-                25% of the task are completed.
-              </p>
-            </div>
-            <div className="flex-col space-y-1">
-              <h2>Task 2</h2>
-              <div className="flex items-center border-2 border-green-500 w-full h-3 rounded-full">
-                <div className="bg-green-500 rounded-full w-3/4 h-3 -ml-[1px]"></div>
-              </div>
-              <p className="text-xs text-gray-400">
-                75% of the task are completed.
-              </p>
-            </div>
-            <div className="flex-col space-y-1">
-              <h2>Task 3</h2>
-              <div className="flex items-center border-2 border-green-500 w-full h-3 rounded-full">
-                <div className="bg-green-500 rounded-full w-4/5 h-3 -ml-[1px]"></div>
-              </div>
-              <p className="text-xs text-gray-400">
-                80% of the task are completed.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="row-span-2 col-span-2 bg-myColors-700 p-6 rounded-xl">
+        <div className="row-span-1 col-span-2 bg-myColors-700 p-6 rounded-xl">
           <h2 className="font-fancy mb-4">Professionnel Information</h2>
           <div className="grid grid-cols-2 gap-2">
+            <div className="flex col-span-2 space-x-2 bg-myColors-300 rounded-2xl p-2 text-myColors-600">
+              <div>
+                <BriefcaseIcon className="h-6 w-6" />
+              </div>
+              <div>
+                <h2 className=" font-light">Designation</h2>
+                <h3 className="text-white">{rh.designation}</h3>
+              </div>
+            </div>
             <ProfileUserRow
               Icon={CalendarIcon}
               title="Join Date"
               info={new Date(rh.createdAt).toUTCString().substring(5, 16)}
             />
             <ProfileUserRow
-              Icon={BriefcaseIcon}
+              Icon={DocumentTextIcon}
               title="Contrat Type"
               info="CDD"
             />
-            <ProfileUserRow
-              Icon={CakeIcon}
-              title="Date of Birth"
-              info={convDate.toUTCString().substring(5, 16)}
-            />
-            <ProfileUserRow
-              Icon={CakeIcon}
-              title="Date of Birth"
-              info={convDate.toUTCString().substring(5, 16)}
-            />
-            <div className="flex col-span-2 space-x-2 bg-myColors-300 rounded-2xl p-3 text-myColors-600">
-              <div>
-                <UserGroupIcon className="h-6 w-6" />
-              </div>
-              <div>
-                <h2 className=" font-light">Teams</h2>
-                <div className="text-white flex-col space-y-4 mt-4">
-                  {team.name}
-                </div>
-              </div>
-            </div>
           </div>
+        </div>
+        <div className="row-span-2 col-span-2 bg-myColors-700 p-6 rounded-xl">
+          <h2 className="font-fancy mb-4">In Progress Files</h2>
         </div>
       </div>
     </div>

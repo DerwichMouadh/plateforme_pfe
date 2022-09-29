@@ -20,7 +20,7 @@ function Profile({ id }) {
         ></link> */}
       </Head>
 
-      <Sidebar />
+      <Sidebar id={id} />
       <div className=" bg-myColors-100 h-screen w-7/12 relative">
         <Navbar navBarTitle_1="Overview" navBarTitle_2="" id={id} />
         <ProfileUserContent id={id} />

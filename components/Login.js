@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import bg from "../images/bg.jpg";
-import logo from "../images/logo_violet.png";
+import logo from "../images/logo_1.png";
 import axios from "axios";
 import { LockClosedIcon, LockOpenIcon, UserIcon } from "@heroicons/react/solid";
 import Link from "next/link";

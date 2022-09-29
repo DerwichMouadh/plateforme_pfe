@@ -10,7 +10,7 @@ import Sidebar from "../components/Sidebar";
 import { requirePageAuth } from "../utils/auth";
 import { useEffect, useState } from "react";
 
-function Schedule() {
+function Schedule( {id}) {
   const [team1, setTeam1] = useState(true);
   const [team2, setTeam2] = useState(false);
   return (
@@ -29,7 +29,7 @@ function Schedule() {
         ></link>
       </Head>
 
-      <Sidebar />
+      <Sidebar id={id}/>
       <div className=" bg-myColors-100 h-screen w-7/12 relative">
         <Navbar navBarTitle_1="Schedule" navBarTitle_2="" />
         <ScheduleContent />

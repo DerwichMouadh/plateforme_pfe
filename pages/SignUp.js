@@ -1,18 +1,18 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import bg from "../images/bg.jpg";
 import authService from "../services/authService";
 import route from "next/router";
-import { ArrowCircleLeftIcon } from "@heroicons/react/outline";
+import { ArrowCircleLeftIcon, UserIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
+import logo from "../images/logo_1.png";
 
 import Swal from "sweetalert2";
 function SignUp() {
-
   const router = useRouter();
- 
+
   const [error, setError] = useState({
     password: "",
     confirmPassword: "",
@@ -23,43 +23,49 @@ function SignUp() {
   const input4 = useRef();
   const input5 = useRef();
   const input6 = useRef();
-  const input69 = useRef();
-  const input7= useRef();
+  const input7 = useRef();
   const input8 = useRef();
-  
-  const [user, setUser] = useState({ password: "", email: "" ,designation:"", location:"", date_of_birth:"", gender:"" ,firstname:"",lastname:""});
+  const input9 = useRef();
+  const input10 = useRef();
 
-  
+  const [user, setUser] = useState({
+    password: "",
+    email: "",
+    designation: "",
+    location: "",
+    date_of_birth: Date(),
+    gender: "",
+    firstname: "",
+    lastname: "",
+    phone: "",
+    image: "",
+  });
 
-    function handleSubmit(e) {
-      e.preventDefault();
-      const config = {
-        method: "post",
-        url: "http://localhost:5000/auth/register",
-        headers: {},
-        data: user,
-      };
-      axios(config)
-        .then((response) => {
-          router.push("/")
-          console.log(JSON.stringify(response.data));
-          
-        })
-        .catch((error) => {
-          console.log("error")
-        });
-    }
- 
-function handleInputChange(e, setUser) {
-      const fieldName = e.target.name;
-      setUser((prevUser) => {
-        return { ...prevUser, [fieldName]: e.target.value };
+  function handleSubmit(e) {
+    e.preventDefault();
+    const config = {
+      method: "post",
+      url: "http://localhost:5000/auth/register",
+      headers: {},
+      data: user,
+    };
+    axios(config)
+      .then((response) => {
+        router.push("/");
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log("error");
       });
-    }
-    
-  
+  }
 
-  
+  function handleInputChange(e, setUser) {
+    const fieldName = e.target.name;
+    setUser((prevUser) => {
+      return { ...prevUser, [fieldName]: e.target.value };
+    });
+  }
+
   const validateInput = (e) => {
     let { name, value } = e.target;
     setError((prev) => {
@@ -119,11 +125,14 @@ function handleInputChange(e, setUser) {
             </Link>
           </div>
           <div className="space-y-8">
-            <div>
-              <img
-                className="mx-auto h-12 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                alt="Workflow"
+            <div className="text-center">
+              <Image
+                alt="logo"
+                src={logo}
+                priority
+                width="120"
+                height="120"
+                className=" object-contain"
               />
               <p className="mt-2 text-center text-sm font-medium text-myColors-600">
                 Welcome
@@ -136,7 +145,7 @@ function handleInputChange(e, setUser) {
               <div className="mt-10 sm:mt-0">
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                   <div className="mt-5 md:mt-0 md:col-span-3">
-                    <form   onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                       <div className="overflow-hidden rounded-xl">
                         <div className="px-4 py-5 bg-transparent sm:p-6">
                           <div className="grid grid-cols-8 gap-6">
@@ -149,17 +158,14 @@ function handleInputChange(e, setUser) {
                               </label>
                               <input
                                 type="text"
-                                ref={input3}
-                              
+                                ref={input1}
                                 name="firstname"
                                 id="firstname"
                                 onChange={(e) => {
                                   handleInputChange(e, setUser);
                                 }}
-                              
                                 //onChange={onChangeHandler}
-                                
-                        
+
                                 autoComplete="given-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
@@ -173,14 +179,13 @@ function handleInputChange(e, setUser) {
                                 Last name
                               </label>
                               <input
-                                 type="text"
-                                 ref={input4}
-                               
-                                 name="lastname"
-                                 id="lastname"
-                                 onChange={(e) => {
-                                   handleInputChange(e, setUser);
-                                 }}
+                                type="text"
+                                ref={input2}
+                                name="lastname"
+                                id="lastname"
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
                                 autoComplete="family-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
@@ -194,24 +199,44 @@ function handleInputChange(e, setUser) {
                                 Email address
                               </label>
                               <input
-                              ref={input1}
-                              type="email"
-                              name="email"
-                              id="email"
-                              onChange={(e) => {
-                                handleInputChange(e, setUser);
-                              }}
-                                
-                               
-                                
+                                ref={input3}
+                                type="email"
+                                name="email"
+                                id="email"
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
                                 //onChange={onChangeHandler}
-                              
-                             
+
                                 autoComplete="email"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
                             </div>
-                            <div className="col-span-6 sm:col-span-4">
+                            <div className="col-span-6 sm:col-span-2 mx-auto">
+                              <label className="block text-sm font-medium text-gray-200">
+                                Photo
+                              </label>
+                              <div className="mt-1 flex space-x-2 items-center">
+                                <div>
+                                  <UserIcon className="h-10 w-10 bg-gray-400 rounded-full p-1" />
+                                </div>
+                                <div className="col-md-6 col-xs-12">
+                                  <input
+                                    ref={input4}
+                                    type="file"
+                                    className="fileinput text-xs font-bold"
+                                    name="image"
+                                    id="image"
+                                    title="image"
+                                    onChange={(e) => {
+                                      handleInputChange(e, setUser);
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="col-span-6 sm:col-span-2">
                               <label
                                 htmlFor="email-address"
                                 className="block text-sm font-medium text-gray-200 pl-4"
@@ -219,21 +244,18 @@ function handleInputChange(e, setUser) {
                                 Password
                               </label>
                               <input
-                              ref={input2}
+                                ref={input5}
                                 type="password"
                                 name="password"
-                                
                                 onChange={(e) => {
                                   handleInputChange(e, setUser);
                                 }}
-                                
                                 //onChange={onChangeHandler}
-                               
+
                                 // value={input.password}
                                 // onChange={pass}
                                 // onBlur={validateInput}
                                 id="password"
-                                placeholder="Enter Password"
                                 autoComplete="password"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
@@ -243,7 +265,7 @@ function handleInputChange(e, setUser) {
                                 </span>
                               )}
                             </div>
-                            <div className="col-span-6 sm:col-span-4">
+                            <div className="col-span-6 sm:col-span-2">
                               <label
                                 htmlFor="email-address"
                                 className="block text-sm font-medium text-gray-200 pl-4"
@@ -253,7 +275,6 @@ function handleInputChange(e, setUser) {
                               <input
                                 type="password"
                                 name="confirmPassword"
-                                placeholder="Enter Confirm Password"
                                 //onChange={onChangeHandler}
                                 // value={input.confirmPassword}
                                 // onChange={pass}
@@ -268,6 +289,25 @@ function handleInputChange(e, setUser) {
                                 </span>
                               )}
                             </div>
+                            <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                              <label
+                                htmlFor="phone"
+                                className="block text-sm font-medium text-gray-200 pl-4"
+                              >
+                                Phone Number
+                              </label>
+                              <input
+                                type="text"
+                                ref={input6}
+                                name="phone"
+                                id="phone"
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
+                                autoComplete="phone"
+                                className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
+                              />
+                            </div>
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
@@ -276,55 +316,61 @@ function handleInputChange(e, setUser) {
                               >
                                 Designation
                               </label>
-                              {/* <select
+                              <select
                                 type="text"
-                                ref={input5}
-                              
+                                ref={input7}
                                 name="designation"
                                 id="designation"
                                 onChange={(e) => {
                                   handleInputChange(e, setUser);
                                 }}
-                                
                                 //onChange={onChangeHandler}
                                 autoComplete="country-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               >
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="Front End Developer"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   Front End Developer
                                 </option>
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="Back End Developer"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   Back End Developer
                                 </option>
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="Software Architect"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   Software Architect
                                 </option>
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="UI/UX Designer"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   UI/UX Designer
                                 </option>
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="Project Manager"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   Project Manager
                                 </option>
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="QA Engineer"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   QA Engineer
                                 </option>
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="Business Analyst"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   Business Analyst
                                 </option>
-                              </select> */}
-                              <input
-                               type="text"
-                               ref={input69}
-                             
-                               name="designation"
-                               id="designation"
-                               onChange={(e) => {
-                                 handleInputChange(e, setUser);
-                               }}
-                              
-                                autoComplete="address-level2"
-                                className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
-                              />
+                              </select>
                             </div>
 
                             <div className="col-span-6 sm:col-span-6 lg:col-span-2">
@@ -335,15 +381,13 @@ function handleInputChange(e, setUser) {
                                 Location
                               </label>
                               <input
-                               type="text"
-                               ref={input6}
-                             
-                               name="location"
-                               id="location"
-                               onChange={(e) => {
-                                 handleInputChange(e, setUser);
-                               }}
-                              
+                                type="text"
+                                ref={input8}
+                                name="location"
+                                id="location"
+                                onChange={(e) => {
+                                  handleInputChange(e, setUser);
+                                }}
                                 autoComplete="address-level2"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               />
@@ -360,11 +404,7 @@ function handleInputChange(e, setUser) {
                                 type="date"
                                 name="date_of_birth"
                                 //onChange={onChangeHandler}
-                              
-                                ref={input7}
-                              
-                                
-                               
+                                ref={input9}
                                 onChange={(e) => {
                                   handleInputChange(e, setUser);
                                 }}
@@ -373,7 +413,7 @@ function handleInputChange(e, setUser) {
                               />
                             </div>
 
-                            {/* <div className="col-span-6 sm:col-span-2">
+                            <div className="col-span-6 sm:col-span-2">
                               <label
                                 htmlFor="country"
                                 className="block text-sm font-medium text-gray-200 pl-4"
@@ -382,8 +422,7 @@ function handleInputChange(e, setUser) {
                               </label>
                               <select
                                 type="text"
-                                ref={input8}
-                              
+                                ref={input10}
                                 name="gender"
                                 id="designation"
                                 onChange={(e) => {
@@ -393,14 +432,20 @@ function handleInputChange(e, setUser) {
                                 autoComplete="country-name"
                                 className="backdrop-blur-sm bg-white/10 rounded-full border-0 w-full focus:ring-0 px-4 py-2 placeholder-gray-400 text-white focus:z-10 sm:text-sm mt-1"
                               >
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="Male"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   Male
                                 </option>
-                                <option className="text-gray-500 bg-gray-300">
+                                <option
+                                  value="Female"
+                                  className="text-gray-500 bg-gray-300"
+                                >
                                   Female
                                 </option>
                               </select>
-                            </div> */}
+                            </div>
                           </div>
                         </div>
                         <div className="px-4 py-3 bg-transparent text-center sm:px-6">
@@ -422,6 +467,5 @@ function handleInputChange(e, setUser) {
       </div>
     </div>
   );
-
 }
 export default SignUp;

@@ -6,7 +6,7 @@ import Pagination from "../components/Pagination";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { data } from "autoprefixer";
 
-function FileRequestListContent({ token }) {
+function FileRequestListContent({ token , id}) {
   const [ready, setReady] = useState(false);
   const [inprogress, setInprogress] = useState(false);
   const [refused, setRefused] = useState(false);
@@ -22,28 +22,29 @@ function FileRequestListContent({ token }) {
   const [files, setFiles] = useState([]);
   useEffect(() => {
     getAll();
-  }, [pageNumber]);
+  }, []);
 
   const getAll = () => {
     const config = {
       method: "GET",
-      url: `http://localhost:5000/filerequests?page=${pageNumber}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      url: `http://localhost:5000/filerequests/all`,
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
     };
     axios(config)
       .then(({ status, data }) => {
         if (status === 200) {
           setFiles(data.data);
-          setNumberOfPages(data.totalPages);
-          setTotalNumberOfPages(data.total);
         }
       })
       .catch((err) => {
         console.error("err", err);
       });
   };
+  let user = [];
+  user = files.filter((file) => file.user._id === id);
+  
 
   const goToPrevious = () => {
     setPageNumber(Math.max(0, pageNumber - 1));
@@ -128,7 +129,7 @@ function FileRequestListContent({ token }) {
 
         <div className="flex-col space-y-2">
           {ready &&
-            files
+            user
               ?.filter((file) => file.status === "Ready")
               .map(({ _id, name, wording, status, createdAt }, i) => (
                 <FileRequestRow
@@ -145,7 +146,7 @@ function FileRequestListContent({ token }) {
                 />
               ))}
           {inprogress &&
-            files
+            user
               ?.filter((file) => file.status === "In Progress")
               .map(({ _id, name, wording, status, createdAt }, i) => (
                 <FileRequestRow
@@ -162,7 +163,7 @@ function FileRequestListContent({ token }) {
                 />
               ))}
           {refused &&
-            files
+            user
               ?.filter((file) => file.status === "Refused")
               .map(({ _id, name, wording, status, createdAt }, i) => (
                 <FileRequestRow
@@ -179,7 +180,7 @@ function FileRequestListContent({ token }) {
                 />
               ))}
           {all &&
-            files.map(({ _id, name, wording, status, createdAt }, i) => (
+            user.map(({ _id, name, wording, status, createdAt }, i) => (
               <FileRequestRow
                 id={_id}
                 getAll={getAll}
