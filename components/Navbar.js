@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
 import RhService from "../services/RhService";
+import image from "../images/SJ.jpg"
 
 function Navbar({ navBarTitle_1, navBarTitle_2, id }) {
   
@@ -73,7 +74,7 @@ function Navbar({ navBarTitle_1, navBarTitle_2, id }) {
         >
           <Image
             alt=""
-            src="https://images2.minutemediacdn.com/image/fetch/w_850,h_560,c_fill,g_auto,f_auto/https%3A%2F%2Ftherealchamps.com%2Fwp-content%2Fuploads%2Fgetty-images%2F2020%2F02%2F1192510411-850x560.jpeg"
+            src={image}
             width={35}
             height={35}
             layout="fixed"

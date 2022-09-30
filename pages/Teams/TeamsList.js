@@ -47,7 +47,7 @@ function TeamsList({ token, id }) {
         ></link>
       </Head>
 
-      <Sidebar />
+      <Sidebar id={id} />
       <div className=" bg-myColors-100 h-screen w-7/12 relative">
         <Navbar navBarTitle_1="Team Members" navBarTitle_2={team.name} id={id} />
         <div className="bg-myColors-200 rounded-2xl w-7/12 fixed top-[82px] my-8 mb-24 -bottom-16 pt-16 pb-24 p-8 text-white scrollbar scrollbar-thumb-hidden scrollbar-track-hidden">

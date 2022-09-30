@@ -33,7 +33,7 @@ function AnnouncRow({ _id, title, description, createdAt }) {
         </div>
         {!openAnnounc && (
           <div className="text-xs text-gray-300">
-            {description.substring(0, 30)}...
+            {description.substring(0, 60)}...
           </div>
         )}
         {openAnnounc && (

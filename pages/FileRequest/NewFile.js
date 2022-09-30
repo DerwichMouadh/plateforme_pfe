@@ -7,10 +7,10 @@ import RightSidebar from "../../components/RightSidebar";
 
 import UserListContent from "../../components/UserListContent";
 import Pagination from "../../components/Pagination";
-import FileRequestListContent from "../../components/FileRequestListContent";
+import NewFileContent from "../../components/NewFileContent";
 import { requirePageAuth } from "../../utils/auth";
 
-function FileRequestList({ token, id }) {
+function NewFile({ token, id }) {
   return (
     <div className="flex">
       <Head>
@@ -24,8 +24,8 @@ function FileRequestList({ token, id }) {
       </Head>
       <Sidebar id={id} />
       <div className="bg-myColors-100 h-screen w-7/12 relative">
-        <Navbar navBarTitle_1="Files" navBarTitle_2="File Requests List" id={id}/>
-        <FileRequestListContent token={token} id={id} />
+        <Navbar navBarTitle_1="Files" navBarTitle_2="Request a New File" id={id}/>
+        <NewFileContent token={token} id={id} />
       </div>
       <RightSidebar />
     </div>
@@ -33,4 +33,5 @@ function FileRequestList({ token, id }) {
 }
 
 export const getServerSideProps = requirePageAuth;
-export default FileRequestList;
+
+export default NewFile;

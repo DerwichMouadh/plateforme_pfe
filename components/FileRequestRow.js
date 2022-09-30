@@ -47,16 +47,13 @@ function FileRequestRow({ id, name, wording, status, date, token, getAll, number
   }
 
   return (
-    <div className="flex h-11 items-center text-xs bg-myColors-300 hover:bg-myColors-400 py-1 rounded-xl cursor-pointer">
-      <h4 className="w-2/12 pl-6">{name}</h4>
-      <h4 className="w-3/12">{wording}</h4>
+    <div className="flex h-11 items-center text-xs bg-myColors-300 hover:bg-myColors-400 py-1 rounded-xl">
+      
+      <h4 className="w-5/12 pl-6">{wording}</h4>
       <h4 className="w-2/12">{status}</h4>
-      <h4 className="w-3/12">{convDate.toUTCString().substring(0, 22)}</h4>
-      <div className="w-1/12 flex space-x-3 ml-6">
-        {status === "In Progress" && <CheckCircleIcon className="h-6 w-6 opacity-75 hover:opacity-100 bg-green-500 text-myColors-300 p-1 rounded-lg" onClick={(e) => updateFileReady(id)} />}
-        {status === "In Progress" && <MinusCircleIcon className="h-6 w-6 opacity-75 hover:opacity-100 bg-red-500 text-myColors-300 p-1 rounded-lg" onClick={(e) => updateFileRefused(id)} />}
-      </div>
-      <div className="w-1/12 flex justify-center ml-2">
+      <h4 className="w-4/12">{convDate.toUTCString().substring(0, 22)}</h4>
+      
+      <div className="w-1/12 flex justify-center">
         {status === "Ready" && <CheckCircleIcon className="h-5 w-5 text-green-500" />}
         {status === "Refused" && <MinusCircleIcon className="h-5 w-5 text-red-500" />}
         {status === "In Progress" && <ExclamationCircleIcon className="h-5 w-5 text-yellow-500" />}

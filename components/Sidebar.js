@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   ArrowCircleRightIcon,
   ArrowCircleDownIcon,
+  FingerPrintIcon,
 } from "@heroicons/react/solid";
 import {
   UserIcon,
@@ -32,6 +33,9 @@ function Sidebar({ token, id }) {
   let date = new Date().toUTCString().substring(0, 16);
   const [currTime, setCurrTime] = useState(time);
   const [currDate, setCurrDate] = useState(date);
+
+  const [click, setClick] = useState(false);
+
   const updateTime = () => {
     time = new Date().toLocaleTimeString();
     setCurrTime(time);
@@ -73,6 +77,7 @@ function Sidebar({ token, id }) {
   };
   let user = [];
   filtredFiles = files.filter((file) => file.status === "In Progress");
+
   user = filtredFiles.filter((file) => file.user._id === id);
   let num = user.length;
 
@@ -86,6 +91,49 @@ function Sidebar({ token, id }) {
       console.log(res.data[n]);
     });
   }, [url]);
+
+  const [sheets, setSheets] = useState([]);
+  useEffect(() => {
+    getAll();
+  }, []);
+  const getAll = () => {
+    const config = {
+      method: "GET",
+      url: "http://localhost:5000/sheets",
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
+    };
+    axios(config)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          setSheets(data.data);
+        }
+      })
+      .catch((err) => {
+        console.error("err", err);
+      });
+  };
+
+  // let today = [];
+  // today = sheets.filter((sheet) => Date(sheet.createdAt) === Date());
+
+  // let ps = {
+  //   _id: "46584613",
+  //   date: Date.now(),
+  //   emplyees: [
+  //     { _id: "123", status: "A" },
+  //     { _id: "456", status: "A" },
+  //     { _id: "789", status: "A" },
+  //   ],
+  // };
+
+  // let list = ["123", "456", "789"];
+  // let list2 = ["A", "A", "A"];
+
+  // let employees = list.map(function (x, i) {
+  //   return [x, list2[i]];
+  // });
 
   return (
     <div className="bg-myColors-100 p-4 pb-8 text-sm font-medium w-2/12 min-w-[200px] flex flex-col space-y-3 h-screen">
@@ -111,34 +159,7 @@ function Sidebar({ token, id }) {
             </a>
           </Link>
         </div>
-        <div
-          onClick={() => setOpen(!open)}
-          className="flex hover:rounded-2xl group hover:bg-myColors-300"
-        >
-          <a className="w-full">
-            <SidebarRow
-              Icon={UserIcon}
-              title="Users"
-              Plus={!open ? ArrowCircleRightIcon : ArrowCircleDownIcon}
-            />
-          </a>
-        </div>
-        <div className={`${open ? "block" : "hidden"} flex flex-col`}>
-          <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300">
-            <Link href="/Users/AddUser" className="">
-              <a className="w-full">
-                <SidebarRow Icon={UserAddIcon} title="Add User" color />
-              </a>
-            </Link>
-          </div>
-          <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300">
-            <Link href="/Users/UserList">
-              <a className="w-full">
-                <SidebarRow Icon={ClipboardListIcon} title="User List" color />
-              </a>
-            </Link>
-          </div>
-        </div>
+
         <div className="flex pr-5 items-center hover:rounded-2xl mb-1 group hover:bg-myColors-300">
           <Link href="/FileRequest/FileRequestList">
             <a className="w-full relative">
@@ -168,37 +189,9 @@ function Sidebar({ token, id }) {
             </div>
 
             <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300">
-              <Link href="/Overview">
-                <a className="w-full">
-                  <SidebarRow Icon={CogIcon} title="Settings" />
-                </a>
-              </Link>
-            </div>
-            <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300">
               <Link href="/Teams/TeamsList">
                 <a className="w-full">
                   <SidebarRow Icon={UserGroupIcon} title="Team Members" />
-                </a>
-              </Link>
-            </div>
-            <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300 ">
-              <Link href="/Overview">
-                <a className="w-full">
-                  <SidebarRow Icon={ViewGridIcon} title="Overview 1" />
-                </a>
-              </Link>
-            </div>
-            <div className="flex hover:rounded-2xl mb-1 relative group hover:bg-myColors-300 ">
-              <Link href="/Overview">
-                <a className="w-full">
-                  <SidebarRow Icon={ViewGridIcon} title="Overview 2" />
-                </a>
-              </Link>
-            </div>
-            <div className="flex hover:rounded-2xl relative group hover:bg-myColors-300 ">
-              <Link href="/Overview">
-                <a className="w-full">
-                  <SidebarRow Icon={ViewGridIcon} title="Overview 3" />
                 </a>
               </Link>
             </div>
@@ -215,6 +208,14 @@ function Sidebar({ token, id }) {
             )}
           </a>
         </div>
+      </div>
+      <div className=" bg-myColors-300 rounded-2xl justify-center flex items-center space-y-4 p-3 text-white">
+        {click && (
+          <FingerPrintIcon className="h-10 w-10 text-myColors-600" />
+        )}
+        {!click && (
+          <FingerPrintIcon onClick={() => setClick(true)} className="h-10 w-10 cursor-pointer hover:text-myColors-600" />
+        )}
       </div>
       <div className=" bg-myColors-300 rounded-2xl flex items-center space-y-4 h-[250px] min-h-[250px] p-3 text-white">
         <div className="flex-col space-y-6">

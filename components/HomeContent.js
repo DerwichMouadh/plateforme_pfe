@@ -218,26 +218,9 @@ function HomeContent() {
 
   return (
     <div className="bg-myColors-200 rounded-2xl grid grid-cols-6 gap-4 w-7/12 fixed top-[82px] my-8 bottom-0 p-8 text-white scrollbar scrollbar-thumb-hidden scrollbar-track-hidden">
-      <div className="bg-myColors-700 p-4 rounded-2xl col-span-3 min-h-96">
-        <h1 className="text-center text-lg pb-8">Birthday</h1>
-        {first === 0 && (
-          <div className="grid place-items-center py-20">
-            <CakeIcon className="h-20 w-20 text-myColors-600" />
-            <div className=" text-sm text-gray-500 pt-2">
-              No birthdays today
-            </div>
-          </div>
-        )}
-        {first === 1 && (
-          <div className="flex-col space-y-2">
-            <BirthdayRow firstname="Mustapha" lastname="El Masri" age="24" />
-            <BirthdayRow firstname="Mustapha" lastname="El Masri" age="24" />
-            <BirthdayRow firstname="Mustapha" lastname="El Masri" age="24" />
-          </div>
-        )}
-      </div>
+      
 
-      <div className="bg-myColors-700 p-4 rounded-2xl col-span-3 min-h-96">
+      <div className="bg-myColors-700 p-4 rounded-2xl col-span-6 min-h-96">
         <h1 className="text-center text-lg pb-8">Announcements</h1>
         {announcements.length === 0 && (
           <div className="grid place-items-center py-20">
@@ -259,25 +242,25 @@ function HomeContent() {
         )}
       </div>
 
-      <div className="bg-myColors-700 p-4 rounded-2xl col-span-3 min-h-96">
-        <h1 className="text-center text-lg pb-8">Quick Links</h1>
+      <div className="bg-myColors-700 p-4 rounded-2xl col-span-2 min-h-96">
+        <h1 className="text-center text-lg pb-8">Birthday</h1>
         {first === 0 && (
           <div className="grid place-items-center py-20">
-            <LinkIcon className="h-20 w-20 text-myColors-600" />
-            <div className=" text-sm text-gray-500 pt-2">No quick links</div>
+            <CakeIcon className="h-20 w-20 text-myColors-600" />
+            <div className=" text-sm text-gray-500 pt-2">
+              No birthdays today
+            </div>
           </div>
         )}
         {first === 1 && (
           <div className="flex-col space-y-2">
-            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
-            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
-            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
-            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
+            <BirthdayRow firstname="Mustapha" lastname="El Masri" age="24" />
+            <BirthdayRow firstname="Antonio" lastname="Rüdiger" age="29" />
           </div>
         )}
       </div>
 
-      <div className="bg-myColors-700 p-4 rounded-2xl col-span-3 min-h-96">
+      <div className="bg-myColors-700 p-4 rounded-2xl col-span-4 min-h-96">
         <h1 className="text-center text-lg pb-8">Upcoming Holidays</h1>
         <div className="flex text-sm">
           <div className="w-1/3 pl-4">Date</div>
@@ -307,11 +290,19 @@ function HomeContent() {
       </div>
 
       <div className="bg-myColors-700 p-4 rounded-2xl col-span-3 min-h-96">
-        <h1 className="text-center text-lg pb-8">My Files</h1>
-        {first === 1 && (
+        <h1 className="text-center text-lg pb-8">Quick Links</h1>
+        {first === 0 && (
           <div className="grid place-items-center py-20">
-            <ClipboardIcon className="h-20 w-20 text-myColors-600" />
-            <div className=" text-sm text-gray-500 pt-2">No files</div>
+            <LinkIcon className="h-20 w-20 text-myColors-600" />
+            <div className=" text-sm text-gray-500 pt-2">No quick links</div>
+          </div>
+        )}
+        {first === 1 && (
+          <div className="flex-col space-y-2">
+            <QuickLinkRow title="Render Props" link="https://reactjs.org/docs/render-props.html/" />
+            <QuickLinkRow title="Testing Overview" link="https://reactjs.org/docs/testing.html/" />
+            <QuickLinkRow title="Fantasy Premier League" link="https://fantasy.premierleague.com/" />
+            <QuickLinkRow title="getServerSideProps" link="https://nextjs.org/docs/api-reference/data-fetching/get-server-side-props/" />
           </div>
         )}
       </div>
